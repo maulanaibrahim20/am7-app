@@ -381,6 +381,69 @@ function showResponse(data) {
         }
     }
     $errElm.delay(4000).fadeOut("slow");
+
+    if (data.status === "error") {
+        let msgHtml = Array.isArray(data.message)
+            ? data.message.join("<br>")
+            : data.message;
+
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            html: msgHtml,
+            showConfirmButton: false,
+            timer: 2500, // auto close 2.5 detik
+            timerProgressBar: true,
+        });
+        return;
+    }
+
+    if (data.status === "success") {
+        let msgHtml = Array.isArray(data.message)
+            ? data.message.join("<br>")
+            : data.message;
+
+        Swal.fire({
+            icon: "success",
+            title: "Berhasil",
+            html: msgHtml,
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+        }).then(() => {
+            // reset form kalau perlu
+            if (
+                $formElm.length &&
+                $formElm.attr("data-ajxForm-reset") != "false"
+            ) {
+                $formElm[0].reset();
+            }
+
+            // reload datatable kalau ada
+            if ($("#dataTbl").length != 0) {
+                _reload_datatables();
+            }
+            if ($("#dataTblFixed").length != 0) {
+                _reload_datatables();
+            }
+
+            // tutup modal kalau ada
+            if ($elModal.length && $("body").hasClass("modal-open")) {
+                $elModal.modal("toggle");
+                $("body").removeClass("modal-open");
+            }
+        });
+        return;
+    }
+
+    Swal.fire({
+        icon: "info",
+        title: "Info",
+        text: "Response tidak dikenali!",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {

@@ -32,6 +32,10 @@
      href="{{ url('/template') }}/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css" />
  <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
  <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/flatpickr/flatpickr.css" />
+ <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/typeahead-js/typeahead.css" />
+ <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/quill/katex.css" />
+ <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/quill/editor.css" />
+ <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/select2/select2.css" />
  <!-- Row Group CSS -->
  <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css" />
  <!-- Form Validation -->

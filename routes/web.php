@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\{AdminController, CategoryController, SupplierController, UserController};
+use App\Http\Controllers\Backend\{AdminController, CategoryController, ProductController, SupplierController, UserController};
 use App\Http\Controllers\Backend\Auth\{LoginController, RegisterController};
 
 Route::get('/', function () {
@@ -27,6 +27,19 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::put('/update/{id}', 'update')->name('update');
         Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('product')->controller(ProductController::class)->name('product.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/contoh', 'contoh')->name('contoh');
+        Route::get('/getData', 'getData')->name('getData');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::put('/update/{id}', 'update')->name('update');
+        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        Route::post('/addSupplier/{id}', 'addSupplier')->name('addSupplier');
     });
 
     Route::prefix('master')->name('master.')->group(function () {
