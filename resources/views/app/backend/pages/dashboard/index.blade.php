@@ -1,6 +1,6 @@
 @extends('layouts.admin.main')
 @push('css')
-    <link rel="stylesheet" href="{{ url('/assets') }}/vendor/css/pages/cards-advance.css" />
+    <link rel="stylesheet" href="{{ url('/template') }}/vendor/css/pages/cards-advance.css" />
 @endpush
 @section('content')
     <div class="row">
@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                    <img src="{{ url('/assets') }}/img/illustrations/card-website-analytics-1.png"
+                                    <img src="{{ url('/template') }}/img/illustrations/card-website-analytics-1.png"
                                         alt="Website Analytics" width="170" class="card-website-analytics-img" />
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="{{ url('/assets') }}/img/illustrations/card-website-analytics-2.png"
+                                <img src="{{ url('/template') }}/img/illustrations/card-website-analytics-2.png"
                                     alt="Website Analytics" width="170" class="card-website-analytics-img" />
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="{{ url('/assets') }}/img/illustrations/card-website-analytics-3.png"
+                                <img src="{{ url('/template') }}/img/illustrations/card-website-analytics-3.png"
                                     alt="Website Analytics" width="170" class="card-website-analytics-img" />
                             </div>
                         </div>
@@ -373,7 +373,7 @@
                 <div class="card-body">
                     <ul class="p-0 m-0">
                         <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/assets') }}/svg/flags/us.svg" alt="User" class="rounded-circle me-3"
+                            <img src="{{ url('/template') }}/svg/flags/us.svg" alt="User" class="rounded-circle me-3"
                                 width="34" />
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -391,7 +391,7 @@
                             </div>
                         </li>
                         <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/assets') }}/svg/flags/br.svg" alt="User" class="rounded-circle me-3"
+                            <img src="{{ url('/template') }}/svg/flags/br.svg" alt="User" class="rounded-circle me-3"
                                 width="34" />
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -409,7 +409,7 @@
                             </div>
                         </li>
                         <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/assets') }}/svg/flags/in.svg" alt="User" class="rounded-circle me-3"
+                            <img src="{{ url('/template') }}/svg/flags/in.svg" alt="User" class="rounded-circle me-3"
                                 width="34" />
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -427,7 +427,7 @@
                             </div>
                         </li>
                         <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/assets') }}/svg/flags/au.svg" alt="User" class="rounded-circle me-3"
+                            <img src="{{ url('/template') }}/svg/flags/au.svg" alt="User" class="rounded-circle me-3"
                                 width="34" />
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -445,7 +445,7 @@
                             </div>
                         </li>
                         <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/assets') }}/svg/flags/fr.svg" alt="User" class="rounded-circle me-3"
+                            <img src="{{ url('/template') }}/svg/flags/fr.svg" alt="User" class="rounded-circle me-3"
                                 width="34" />
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -463,7 +463,7 @@
                             </div>
                         </li>
                         <li class="d-flex align-items-center">
-                            <img src="{{ url('/assets') }}/svg/flags/cn.svg" alt="User" class="rounded-circle me-3"
+                            <img src="{{ url('/template') }}/svg/flags/cn.svg" alt="User" class="rounded-circle me-3"
                                 width="34" />
                             <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                 <div class="me-2">
@@ -782,5 +782,5 @@
     </div>
 @endsection
 @push('js')
-    <script src="{{ url('/assets') }}/js/dashboards-analytics.js"></script>
+    <script src="{{ url('/template') }}/js/dashboards-analytics.js"></script>
 @endpush

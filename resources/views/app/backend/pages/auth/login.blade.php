@@ -1,15 +1,15 @@
  @extends('layouts.auth.main')
  @push('css')
-     <link rel="stylesheet" href="{{ url('/assets') }}/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
+     <link rel="stylesheet" href="{{ url('/template') }}/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
  @endpush
  @section('left')
      <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
-         <img src="{{ url('/assets') }}/img/illustrations/auth-login-illustration-light.png" alt="auth-login-cover"
+         <img src="{{ url('/template') }}/img/illustrations/auth-login-illustration-light.png" alt="auth-login-cover"
              class="img-fluid my-5 auth-illustration" data-app-light-img="illustrations/auth-login-illustration-light.png"
              data-app-dark-img="illustrations/auth-login-illustration-dark.png" />
 
-         <img src="{{ url('/assets') }}/img/illustrations/bg-shape-image-light.png" alt="auth-login-cover" class="platform-bg"
-             data-app-light-img="illustrations/bg-shape-image-light.png"
+         <img src="{{ url('/template') }}/img/illustrations/bg-shape-image-light.png" alt="auth-login-cover"
+             class="platform-bg" data-app-light-img="illustrations/bg-shape-image-light.png"
              data-app-dark-img="illustrations/bg-shape-image-dark.png" />
      </div>
  @endsection
@@ -42,9 +42,9 @@
          <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
              @csrf
              <div class="mb-3">
-                 <label for="email" class="form-label">Email or Username</label>
-                 <input type="text" class="form-control" id="email" name="login"
-                     placeholder="Enter your email or username" autofocus />
+                 <label for="email" class="form-label">Email</label>
+                 <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email"
+                     autofocus />
              </div>
              <div class="mb-3 form-password-toggle">
                  <div class="d-flex justify-content-between">
@@ -71,3 +71,6 @@
          </p>
      </div>
  @endsection
+ @push('js')
+     <link rel="stylesheet" href="{{ url('/template') }}/vendor/css/pages/page-auth.css" />
+ @endpush

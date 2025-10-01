@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Backend\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Backend\{AdminController, UserController};
 use App\Http\Controllers\Backend\Auth\{LoginController, RegisterController};
 
 Route::get('/', function () {
@@ -16,4 +16,10 @@ Route::middleware('guest')->group(function () {
 
 Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::prefix('user')->name('user.')->controller(UserController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/getData', 'getData')->name('getData');
+        Route::get('/create', 'create')->name('create');
+    });
 });

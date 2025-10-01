@@ -1,0 +1,35 @@
+
+/*dark style */
+body.theme-dark{
+	background: #232325;
+	color: #bababa;
+}
+
+body.theme-dark .navbar {
+    background: #343a40 !important;
+    color: rgba(255,255,255,.7);
+	color: #bababa;
+}
+body.theme-dark .navbar .navbar-nav .nav-link {
+    color: rgba(255,255,255,.7);
+	color: #bababa;
+}
+body.theme-dark .navbar .navbar-nav .active>.nav-link, .theme-dark .navbar .navbar-nav .nav-link.active, .theme-dark .navbar .navbar-nav .nav-link.show, .theme-dark .navbar .navbar-nav .show>.nav-link {
+    color: #fff;
+}
+body.theme-dark .card {
+    border-color: transparent;
+    background-color: #343a40 !important;
+}
+body.theme-dark footer,
+body.theme-dark footer li a {
+	color: #bababa;
+}
+
+body.theme-dark .form-control{
+	color: #bababa !important;
+}
+
+body.theme-dark .note-editor.note-airframe, .note-editor.note-frame {
+    border: 1px solid #2c3c56;
+}

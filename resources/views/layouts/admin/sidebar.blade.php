@@ -27,10 +27,16 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <li class="menu-item">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ Request::segment(1) == '' ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div>Dashboard</div>
+            </a>
+        </li>
+        <li class="menu-item {{ Request::segment(2) == 'user' ? 'active' : '' }}">
+            <a href="{{ route('user.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-user"></i>
+                <div>User</div>
             </a>
         </li>
         <li class="menu-item">

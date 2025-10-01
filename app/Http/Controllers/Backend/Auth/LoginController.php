@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'login' => 'required|min:3|max:50',
+            'email' => 'required|email|min:3|max:50',
             'password' => 'required|min:6|max:50',
         ]);
 
@@ -29,15 +29,14 @@ class LoginController extends Controller
         DB::beginTransaction();
 
         try {
-            $loginField = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-            $user = User::where($loginField, $request->login)->first();
+            $user = User::where('email', $request->email)->first();
 
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return Message::unauthorized($request, "Incorrect email address/username or password.");
             }
 
-            if (Auth::attempt([$loginField => $request->login, 'password' => $request->password])) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $request->session()->regenerate();
 
                 DB::commit();

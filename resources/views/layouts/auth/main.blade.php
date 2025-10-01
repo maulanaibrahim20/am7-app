@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default"
-    data-assets-path="{{ url('/assets') }}/" data-template="vertical-menu-template">
+    data-assets-path="{{ url('/template') }}/" data-template="vertical-menu-template">
 
 <head>
     <meta charset="utf-8" />
@@ -14,6 +14,7 @@
 
     @include('layouts.components.style_css')
     @stack('css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
