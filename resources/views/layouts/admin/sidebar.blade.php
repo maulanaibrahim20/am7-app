@@ -47,6 +47,12 @@
                 <div>Product</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::segment(2) == 'service' ? 'active' : '' }}">
+            <a href="{{ route('service.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-server-2"></i>
+                <div>Service</div>
+            </a>
+        </li>
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Master</span>
         </li>

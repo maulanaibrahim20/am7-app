@@ -419,14 +419,6 @@ function showResponse(data) {
                 $formElm[0].reset();
             }
 
-            // reload datatable kalau ada
-            if ($("#dataTbl").length != 0) {
-                _reload_datatables();
-            }
-            if ($("#dataTblFixed").length != 0) {
-                _reload_datatables();
-            }
-
             // tutup modal kalau ada
             if ($elModal.length && $("body").hasClass("modal-open")) {
                 $elModal.modal("toggle");
