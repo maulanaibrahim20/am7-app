@@ -50,14 +50,20 @@
                 <div>Category</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::segment(3) == 'supplier' ? 'active' : '' }}">
+            <a href="{{ route('master.supplier.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-truck-delivery"></i>
+                <div>Supplier</div>
+            </a>
+        </li>
     </ul>
     <div class="menu-footer border-top py-3 px-3">
         <div class="d-flex align-items-center">
             <img src="{{ url('/template') }}/img/avatars/1.png" alt="user-avatar" class="rounded-circle me-2"
                 width="36" height="36" />
             <div class="flex-grow-1">
-                <div class="fw-semibold">John Doe</div>
-                <small class="text-muted">Admin</small>
+                <div class="fw-semibold">{{ Auth::user()->name }}</div>
+                <small class="text-muted">{{ Auth::user()->roles->first()->name }}</small>
             </div>
 
             <!-- Dropdown actions -->

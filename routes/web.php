@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\{AdminController, CategoryController, UserController};
+use App\Http\Controllers\Backend\{AdminController, CategoryController, SupplierController, UserController};
 use App\Http\Controllers\Backend\Auth\{LoginController, RegisterController};
 
 Route::get('/', function () {
@@ -30,7 +30,18 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
     });
 
     Route::prefix('master')->name('master.')->group(function () {
+
         Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getData', 'getData')->name('getData');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        });
+
+        Route::prefix('supplier')->controller(SupplierController::class)->name('supplier.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/getData', 'getData')->name('getData');
             Route::get('/create', 'create')->name('create');

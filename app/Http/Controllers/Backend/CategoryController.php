@@ -41,20 +41,22 @@ class CategoryController extends Controller
                 $deleteUrl = route('master.category.destroy', $row->id);
 
                 return '
-        <a href="' . $editUrl . '" class="btn btn-warning btn-sm"
-           data-toggle="ajaxModal" data-title="Category | Edit">
-            <i class="fas fa-pencil me-1"></i>
-        </a>
-        <form action="' . $deleteUrl . '" method="POST"
-              id="ajxFormDelete" class="d-inline">
-            ' . csrf_field() . '
-            ' . method_field('DELETE') . '
-            <button type="submit" class="btn btn-danger btn-sm">
-                <i class="fas fa-trash"></i>
-            </button>
-        </form>
+        <div class="d-flex justify-content-start gap-1">
+            <a href="' . $editUrl . '" class="btn btn-warning"
+               data-toggle="ajaxModal" data-title="Category | Edit">
+                <i class="fas fa-pencil"></i>
+            </a>
+            <form action="' . $deleteUrl . '" method="POST" class="m-0 p-0">
+                ' . csrf_field() . '
+                ' . method_field('DELETE') . '
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
+        </div>
     ';
             })
+
             ->rawColumns(['is_active', 'type', 'action'])
             ->make();
     }
