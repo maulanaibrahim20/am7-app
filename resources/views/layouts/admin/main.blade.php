@@ -15,6 +15,11 @@
     <!-- Vendors CSS -->
     @include('layouts.components.style_css')
     @stack('css')
+    <style>
+        #img-loader {
+            height: 40px;
+        }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -81,7 +86,6 @@
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->
-
     <div class="modal fade" id="ajaxModal" tabindex="-1" atabindex="-1" role="dialog"
         aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -93,13 +97,33 @@
                 <div class="modal-body">
                     <div id="modal-message"></div>
                     <div class="modal_content">
-                        <center><img id="img-loader" src="{{ url('template/assets/svg/loading.svg') }}" height="40"
-                                alt="Loading.." /></center>
+                        <center>
+                            <img id="img-loader" src="{{ url('template/assets/svg/loading.svg') }}" height="40"
+                                alt="Loading.." />
+                        </center>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Global Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="ajaxOffcanvas" aria-labelledby="ajaxOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 id="ajaxOffcanvasLabel" class="offcanvas-title">@yield('offcanvas_title')</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div id="offcanvas-message"></div>
+            <div class="offcanvas_content">
+                <center>
+                    <img id="img-loader" src="{{ url('template/assets/svg/loading.svg') }}" height="10"
+                        alt="Loading.." />
+                </center>
+            </div>
+        </div>
+    </div>
+
 
     {{-- Custome JS --}}
     @include('layouts.components.style_js')

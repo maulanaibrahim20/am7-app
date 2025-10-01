@@ -14,13 +14,9 @@
  <!-- endbuild -->
 
  <!-- Vendors JS -->
- <script src="{{ url('/template') }}/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
- <script src="{{ url('/template') }}/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
- <script src="{{ url('/template') }}/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
  <script src="{{ url('/template') }}/vendor/libs/apex-charts/apexcharts.js"></script>
  <script src="{{ url('/template') }}/vendor/libs/swiper/swiper.js"></script>
  <script src="{{ url('/template') }}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
- <script src="{{ url('/template') }}/js/tables-datatables-basic.js"></script>
 
  <!-- Main JS -->
  <script src="{{ url('/template') }}/js/main.js"></script>
@@ -29,8 +25,6 @@
  <script src="{{ url('/template') }}/js/pages-auth.js"></script>
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- <script src="{{ url('/template') }}/assets/js/backend.js"></script>
-
  <script>
      @if (session('success'))
          Swal.fire({
@@ -70,3 +64,5 @@
          });
      @endif
  </script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+ <script src="{{ url('/template') }}/assets/js/backend.js"></script>

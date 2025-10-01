@@ -25,8 +25,10 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
-
     <ul class="menu-inner py-1">
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Main</span>
+        </li>
         <li class="menu-item {{ Request::segment(1) == '' ? 'active' : '' }}">
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
@@ -39,27 +41,53 @@
                 <div>User</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-settings"></i>
-                <div>Settings</div>
-                <div class="badge bg-label-primary rounded-pill ms-auto"></div>
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Master</span>
+        </li>
+        <li class="menu-item {{ Request::segment(3) == 'category' ? 'active' : '' }}">
+            <a href="{{ route('master.category.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-category"></i>
+                <div>Category</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="#" class="menu-link">
-                        <div>Profile</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <form id="form-logout" action="#" method="get" style="display:none;">
-                        @csrf
-                    </form>
-                    <a href="dashboards-crm.html" id="btn-logout" class="menu-link">
-                        <div>Logout</div>
-                    </a>
-                </li>
-            </ul>
         </li>
     </ul>
+    <div class="menu-footer border-top py-3 px-3">
+        <div class="d-flex align-items-center">
+            <img src="{{ url('/template') }}/img/avatars/1.png" alt="user-avatar" class="rounded-circle me-2"
+                width="36" height="36" />
+            <div class="flex-grow-1">
+                <div class="fw-semibold">John Doe</div>
+                <small class="text-muted">Admin</small>
+            </div>
+
+            <!-- Dropdown actions -->
+            <div class="dropdown">
+                <a href="#" class="text-muted" data-bs-toggle="dropdown">
+                    <i class="ti ti-dots-vertical"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="ti ti-user me-2"></i> Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="ti ti-settings me-2"></i> Settings
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <form id="form-logout" action="{{ url('logout') }}" method="POST" class="d-none">@csrf</form>
+                        <a class="dropdown-item text-danger" href="javascript:void(0);"
+                            onclick="event.preventDefault();document.getElementById('form-logout').submit();">
+                            <i class="ti ti-logout me-2"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </aside>

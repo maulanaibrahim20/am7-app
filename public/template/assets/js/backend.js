@@ -181,6 +181,47 @@ $(document).ready(function () {
         );
     });
 });
+
+$(document).on("click", '[data-toggle="ajaxOffcanvas"]', function (e) {
+    e.preventDefault();
+    console.log("ada ajax offcanvas");
+
+    var $this = $(this),
+        $remote = $this.data("remote") || $this.attr("href");
+
+    // reset posisi (biar ga numpuk class offcanvas-start/end/top/bottom)
+    var $offcanvas = $("#ajaxOffcanvas");
+    $offcanvas.removeClass(
+        "offcanvas-start offcanvas-end offcanvas-top offcanvas-bottom"
+    );
+
+    // cek apakah ada data-size
+    var offcanvasSize = $this.data("size") || "end"; // default end
+    $offcanvas.addClass("offcanvas-" + offcanvasSize);
+
+    // set title & content
+    $("#ajaxOffcanvas .offcanvas-title").html($this.data("title") || "");
+    $("#ajaxOffcanvas .offcanvas_content").load($remote);
+
+    // buka offcanvas
+    var bsOffcanvas = new bootstrap.Offcanvas(
+        document.getElementById("ajaxOffcanvas")
+    );
+    bsOffcanvas.show();
+    return false;
+});
+
+// Reset konten setelah ditutup
+$("#ajaxOffcanvas").on("hidden.bs.offcanvas", function () {
+    $("#ajaxOffcanvas .offcanvas_content").html(
+        '<center><img id="img-loader" src="' +
+            location.protocol +
+            "//" +
+            location.hostname +
+            '/assets/svg/loading.svg" height="40" alt="Loading.." /></center>'
+    );
+});
+
 function _reload_datatables() {
     $("#dataTbl").DataTable({
         iCookieDuration: 60 * 10, // in second // Aku set 10 menit saja

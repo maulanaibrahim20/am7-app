@@ -11,6 +11,11 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
+                    <div class="col-12 text-end">
+                        <a href="{{ route('user.filter') }}" data-toggle="ajaxOffcanvas" data-title="User | Add New"
+                            data-size="end" class="fas fa-filter text-secondary fs-4">
+                        </a>
+                    </div>
                     <table id="dataTbl" class="table table-responsive" data-ajax="{{ route('user.getData') }}"
                         data-processing="true" data-server-side="true" data-length-menu="[10, 25, 50, 75, 100]"
                         data-ordering="true" data-col-reorder="true">
