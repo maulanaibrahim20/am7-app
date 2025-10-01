@@ -53,6 +53,12 @@
                 <div>Service</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::segment(2) == 'customer' ? 'active' : '' }}">
+            <a href="{{ route('customer.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>Customer</div>
+            </a>
+        </li>
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Master</span>
         </li>
@@ -74,8 +80,8 @@
             <img src="{{ url('/template') }}/img/avatars/1.png" alt="user-avatar" class="rounded-circle me-2"
                 width="36" height="36" />
             <div class="flex-grow-1">
-                <div class="fw-semibold">{{ Auth::user()->name }}</div>
-                <small class="text-muted">{{ Auth::user()->roles->first()->name }}</small>
+                <div class="fw-semibold">{{ ucWords(Auth::user()->name) }}</div>
+                <small class="text-muted">{{ ucWords(Auth::user()->roles->first()->name) }}</small>
             </div>
 
             <!-- Dropdown actions -->

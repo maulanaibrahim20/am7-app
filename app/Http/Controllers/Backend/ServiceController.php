@@ -195,12 +195,12 @@ class ServiceController extends Controller
     public function destroy(Request $request, $id)
     {
         try {
-            $category = Service::findOrFail($id);
-            $category->delete();
+            $service = Service::findOrFail($id);
+            $service->delete();
 
-            return Message::deleted($request, "Product deleted successfully");
+            return Message::deleted($request, "Service deleted successfully");
         } catch (\Exception $e) {
-            return Message::exception($request, $e, "Failed to delete product: " . $e->getMessage());
+            return Message::exception($request, $e, "Failed to delete service: " . $e->getMessage());
         }
     }
 }
