@@ -59,6 +59,12 @@
                 <div>Customer</div>
             </a>
         </li>
+        <li class="menu-item {{ Request::segment(2) == 'cashier' ? 'active' : '' }}">
+            <a href="{{ route('cashier') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-cash"></i>
+                <div>Cashier</div>
+            </a>
+        </li>
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Master</span>
         </li>
@@ -84,7 +90,6 @@
                 <small class="text-muted">{{ ucWords(Auth::user()->roles->first()->name) }}</small>
             </div>
 
-            <!-- Dropdown actions -->
             <div class="dropdown">
                 <a href="#" class="text-muted" data-bs-toggle="dropdown">
                     <i class="ti ti-dots-vertical"></i>
@@ -104,9 +109,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li>
-                        <form id="form-logout" action="{{ url('logout') }}" method="POST" class="d-none">@csrf</form>
-                        <a class="dropdown-item text-danger" href="javascript:void(0);"
-                            onclick="event.preventDefault();document.getElementById('form-logout').submit();">
+                        <a class="dropdown-item text-danger" href="{{ route('logout') }}">
                             <i class="ti ti-logout me-2"></i> Logout
                         </a>
                     </li>

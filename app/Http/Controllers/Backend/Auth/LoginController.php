@@ -23,7 +23,7 @@ class LoginController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return Message::validator($request, $validator->errors());
+            return Message::validator($request, $validator->errors()->first());
         }
 
         DB::beginTransaction();
@@ -40,7 +40,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
 
                 DB::commit();
-                return redirect(route('dashboard'));
+                return Message::success($request, "Login successfully.", [], route('dashboard'));
             } else {
                 DB::rollBack();
                 return Message::unauthorized($request, "Incorrect email address/username or password.");

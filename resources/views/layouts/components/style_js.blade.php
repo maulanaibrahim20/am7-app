@@ -34,6 +34,14 @@
          });
      @endif
 
+     @if (session('msg'))
+         Swal.fire({
+             icon: 'success',
+             title: 'Berhasil',
+             text: {!! json_encode(session('msg')) !!}
+         });
+     @endif
+
      // Error (single message)
      @if (session('error'))
          Swal.fire({
@@ -66,3 +74,14 @@
  </script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
  <script src="{{ url('/template') }}/assets/js/backend.js"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+ <script>
+     // Toastr Configuration
+     toastr.options = {
+         "closeButton": true,
+         "progressBar": true,
+         "positionClass": "toast-top-right",
+         "timeOut": "3000"
+     };
+ </script>

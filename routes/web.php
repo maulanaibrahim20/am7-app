@@ -1,8 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Backend\{AdminController, CategoryController, CustomerController, ProductController, ServiceController, SupplierController, UserController};
-use App\Http\Controllers\Backend\Auth\{LoginController, RegisterController};
+use App\Http\Controllers\Backend\{
+    AdminController,
+    CategoryController,
+    CustomerController,
+    ProductController,
+    ServiceController,
+    SupplierController,
+    UserController
+};
+use App\Http\Controllers\Backend\Auth\{
+    LoginController,
+    LogoutController,
+    RegisterController
+};
+use App\Http\Controllers\CashierController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,7 +27,30 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisterController::class, 'register'])->name('register');
 });
 
+
 Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
+    Route::get('/cashier', [CashierController::class, 'index'])->name('cashier');
+    Route::get('/cashier/detail/{id}/{type}', [CashierController::class, 'show'])->name('cashier.show');
+    Route::get('/cashier/getSelect-customer', [CashierController::class, 'getSelectCustomer'])->name('cashier.getSelect-customer');
+    Route::post('/cashier/select-customer', [CashierController::class, 'selectCustomer'])->name('cashier.select-customer');
+
+    Route::post('/cashier/add-to-cart', [CashierController::class, 'addToCart'])->name('cashier.addToCart');
+    Route::get('/cashier/get-cart', [CashierController::class, 'viewCart'])->name('cashier.getCart');
+    Route::post('/cashier/update-cart/{id}', [CashierController::class, 'updateCartItem'])->name('cashier.updateCart');
+    Route::post('/cashier/delete-item/{id}', [CashierController::class, 'removeCartItem'])->name('cashier.deleteCart');
+
+    Route::get('/cashier/hold', [CashierController::class, 'holdModal'])->name('cashier.holdModal');
+    Route::post('/cashier/hold-cart', [CashierController::class, 'holdCart'])->name('cashier.hold-cart');
+
+    Route::get('/cashier/held', [CashierController::class, 'heldCarts'])->name('cashier.held-carts');
+    Route::post('/cashier/resume-cart/{session_code}', [CashierController::class, 'resumeCart'])->name('cashier.resume-cart');
+    Route::post('/cashier/cancel-cart/{session_code}', [CashierController::class, 'cancelCart'])->name('cashier.cancel-cart');
+
+    Route::get('/cashier/checkout', [CashierController::class, 'checkout'])->name('cashier.checkout');
+    Route::post('/cashier/checkout', [CashierController::class, 'processPayment'])->name('cashier.processPayment');
+    Route::get('/cashier/checkout/invoice/{id}', [CashierController::class, 'invoice'])->name('cashier.invoice');
+    Route::get('/cashier/pring/invoice/{id}', [CashierController::class, 'printInvoice'])->name('cashier.printInvoice');
+
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     Route::prefix('user')->name('user.')->controller(UserController::class)->group(function () {
@@ -86,4 +122,6 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
             Route::delete('/delete/{id}', 'destroy')->name('destroy');
         });
     });
+
+    Route::get('/logout', LogoutController::class)->name('logout');
 });

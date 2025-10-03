@@ -126,6 +126,8 @@
 
 
     {{-- Custome JS --}}
+    <script src="{{ url('/template') }}/js/wizard-ex-checkout.js"></script>
+
     @include('layouts.components.style_js')
     @stack('js')
 </body>
