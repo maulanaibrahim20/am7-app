@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Auth, DB, Validator};
 use App\Facades\Message;
 use App\Http\Controllers\Controller;
-use App\Models\{Booking, User};
+use App\Models\{Booking, CartItem, CartSession, Customer, User};
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
@@ -52,25 +52,23 @@ class BookingController extends Controller
                 return $row->created_at ? $row->created_at->format('d M Y H:i') : '-';
             })
             ->addColumn('action', function ($row) {
-                $editUrl   = url('booking.edit', $row->id);
-                $deleteUrl = url('booking.destroy', $row->id);
+                if ($row->status === 'in_progress') {
+                    $deleteUrl = route('booking.loadFromBooking', $row->id);
 
-                return '
-                <div class="d-flex justify-content-start gap-1">
-                    <a href="' . $editUrl . '" class="btn btn-warning"
-                       data-toggle="ajaxModal" data-title="Booking | Edit">
-                        <i class="fas fa-pencil"></i>
-                    </a>
-                   <form action="' . $deleteUrl . '" method="POST"
-                          id="ajxFormDelete" class="m-0 p-0">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </form>
-                </div>
-            ';
+                    return '
+                    <div class="d-flex justify-content-start gap-1">
+                        <form action="' . $deleteUrl . '" method="POST"
+                            class="m-0 p-0">
+                            ' . csrf_field() . '
+                            <button type="submit" class="btn btn-info">
+                                <i class="fas fa-share me-3"></i> Process to cashier
+                            </button>
+                        </form>
+                    </div>
+                ';
+                } else {
+                    return '<span class="badge bg-secondary">No Action</span>';
+                }
             })
             ->rawColumns(['status', 'action', 'booking_code'])
             ->make();
@@ -156,6 +154,95 @@ class BookingController extends Controller
             return Message::updated($request, "Notes updated");
         } catch (\Exception $e) {
             return Message::exception($request, $e, "Failed to update notes. " . $e->getMessage());
+        }
+    }
+
+    public function loadFromBooking($bookingId)
+    {
+        DB::beginTransaction();
+        try {
+            $booking = Booking::with('services')->findOrFail($bookingId);
+
+            // Validasi status booking
+            if (!in_array($booking->status, ['approved', 'in_progress'])) {
+                return redirect()->back()->with('error', 'Booking belum di-approve atau sudah diproses.');
+            }
+
+            // Cek apakah booking sudah pernah dimuat ke cart
+            $existingCart = CartSession::where('booking_id', $bookingId)
+                ->whereIn('status', ['active', 'converted'])
+                ->first();
+
+            if ($existingCart && $existingCart->status === 'converted') {
+                return redirect()->back()->with('error', 'Booking ini sudah pernah diproses.');
+            }
+
+            if ($existingCart && $existingCart->status === 'active') {
+                return redirect()->route('cashier', $existingCart->id)
+                    ->with('info', 'Booking ini sedang dalam proses.');
+            }
+
+            // Cari atau buat customer
+            $customer = Customer::firstOrCreate(
+                ['phone' => $booking->customer_phone],
+                [
+                    'name'  => $booking->customer_name,
+                    'email' => $booking->customer_email,
+                    'vehicle_number' => $booking->vehicle_number,
+                    'vehicle_type'   => $booking->vehicle_type,
+                ]
+            );
+
+            // Hold cart yang sedang aktif (jika ada)
+            CartSession::where('cashier_id', Auth::id())
+                ->where('status', 'active')
+                ->update([
+                    'status'  => 'hold',
+                    'hold_at' => now(),
+                ]);
+
+            // Generate session code
+            $sessionCode = 'CART-' . date('YmdHis') . '-' . Auth::id();
+
+            // Buat cart session baru
+            $cart = CartSession::create([
+                'session_code'   => $sessionCode,
+                'booking_id'     => $booking->id,
+                'customer_id'    => $customer->id,
+                'customer_name'  => $booking->customer_name,
+                'customer_phone' => $booking->customer_phone,
+                'cashier_id'     => Auth::id(),
+                'status'         => 'active',
+            ]);
+
+            // Load services dari booking ke cart
+            foreach ($booking->services as $service) {
+                CartItem::create([
+                    'cart_session_id' => $cart->id,
+                    'cartable_type'   => 'App\Models\Service',
+                    'cartable_id'     => $service->id,
+                    'item_name'       => $service->name,
+                    'quantity'        => 1,
+                    'unit_price'      => $service->base_price,
+                    'discount_percent' => 0,
+                    'discount_amount' => 0,
+                    'subtotal'        => $service->base_price,
+                    'mechanic_id'     => $booking->mechanic_id,
+                ]);
+            }
+
+            $booking->update([
+                'status'     => 'completed',
+                'started_at' => now(),
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('cashier', $cart->id)
+                ->with('success', 'Booking berhasil dimuat ke kasir.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal memproses booking: ' . $e->getMessage());
         }
     }
 }

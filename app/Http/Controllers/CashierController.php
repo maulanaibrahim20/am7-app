@@ -590,9 +590,6 @@ class CashierController extends Controller
         return view('app.backend.pages.cashier.invoice', compact('sale'));
     }
 
-    /**
-     * Print invoice
-     */
     public function printInvoice($id)
     {
         $sale = Sale::with([

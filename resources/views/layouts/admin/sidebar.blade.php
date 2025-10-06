@@ -94,6 +94,12 @@
                     <div>Cashier</div>
                 </a>
             </li>
+            <li class="menu-item {{ Request::segment(2) == 'transaction' ? 'active' : '' }}">
+                <a href="{{ route('cashier') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-arrows-right-left"></i>
+                    <div>Transaction</div>
+                </a>
+            </li>
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Master</span>
             </li>

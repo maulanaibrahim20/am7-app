@@ -20,10 +20,10 @@
                                 <th data-data="booking_time">Time</th>
                                 <th data-data="status">Status</th>
                                 <th data-data="created_at">Created At</th>
-                                {{-- <th data-data="action" data-class-name="text-center" data-orderable="false"
-                                    data-searchable="false">
+                                <th data-data="action" data-class-name="text-center" data-orderable="false"
+                                    data-searchable="false" data-default-content="-">
                                     Action
-                                </th> --}}
+                                </th>
                             </tr>
                         </thead>
                     </table>
