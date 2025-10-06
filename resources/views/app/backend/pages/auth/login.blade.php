@@ -39,7 +39,7 @@
          <h3 class="mb-1 fw-bold">Welcome to Vuexy! 👋</h3>
          <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-         <form id="loginForm" class="mb-3" action="" method="POST">
+         <form id="loginForm" class="mb-3" action="{{ route('login') }}" method="POST">
              @csrf
              <div class="mb-3">
                  <label for="email" class="form-label">Email</label>
@@ -60,7 +60,10 @@
                      <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                  </div>
              </div>
-             <button type="submit" class="btn btn-primary d-grid w-100">Sign in</button>
+             <button type="submit" id="btnLogin" class="btn btn-primary d-grid w-100">
+                 <span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span>
+                 <span class="btn-text">Sign in</span>
+             </button>
          </form>
 
          <p class="text-center">
@@ -73,4 +76,55 @@
  @endsection
  @push('js')
      <link rel="stylesheet" href="{{ url('/template') }}/vendor/css/pages/page-auth.css" />
+     <script>
+         $('#loginForm').on('submit', function(e) {
+             e.preventDefault();
+
+             let $btn = $('#btnLogin');
+             let $spinner = $btn.find('.spinner-border');
+             let $text = $btn.find('.btn-text');
+
+             $btn.prop('disabled', true);
+             $spinner.removeClass('d-none');
+             $text.text('Processing...');
+
+             $.ajax({
+                 url: $(this).attr('action'),
+                 method: 'POST',
+                 data: $(this).serialize(),
+                 success: function(response) {
+                     if (response.status === 'success') {
+                         Swal.fire({
+                             icon: 'success',
+                             title: 'Berhasil',
+                             text: response.message[0],
+                             timer: 1500,
+                             showConfirmButton: false
+                         }).then(() => {
+                             window.location.href = response.redirect ?? '/~admin';
+                         });
+                     } else {
+                         Swal.fire({
+                             icon: 'error',
+                             title: 'Error',
+                             text: response.message[0],
+                         });
+                     }
+                 },
+                 error: function(xhr) {
+                     Swal.fire({
+                         icon: 'error',
+                         title: 'Error',
+                         text: xhr.responseJSON?.message?.[0] ?? "Terjadi kesalahan",
+                     });
+                 },
+                 complete: function() {
+                     // Reset button setelah selesai
+                     $btn.prop('disabled', false);
+                     $spinner.addClass('d-none');
+                     $text.text('Sign in');
+                 }
+             });
+         });
+     </script>
  @endpush

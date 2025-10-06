@@ -16,11 +16,19 @@ use App\Http\Controllers\Backend\Auth\{
     RegisterController
 };
 use App\Http\Controllers\CashierController;
+use App\Http\Controllers\Frontend\LandingPageController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::middleware('guest')->group(function () {
+
+    Route::get('/', [LandingPageController::class, 'home'])->name('home');
+    Route::get('/booking', [LandingPageController::class, 'booking'])->name('booking.index');
+    Route::post('/booking/store', [LandingPageController::class, 'bookingStore'])->name('booking.store');
+
+
+    Route::get('/about', [LandingPageController::class, 'about'])->name('about');
+    Route::get('/services', [LandingPageController::class, 'services'])->name('services');
+    Route::get('/contact', [LandingPageController::class, 'contact'])->name('contact');
+
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
