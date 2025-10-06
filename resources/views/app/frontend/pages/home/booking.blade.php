@@ -1,5 +1,26 @@
-<form action="{{ route('booking.store') }}" method="post" id="ajxForm" data-ajxForm-reset="false">
+<div class="card border-warning mb-4 shadow-sm">
+    <div class="card-body">
+        <h6 class="text-warning mb-3">
+            <i class="fas fa-exclamation-circle me-2"></i> Service Information
+        </h6>
+        <ul class="list-unstyled mb-0">
+            <li><strong>Name:</strong> {{ $service->name }}</li>
+            <li><strong>Description:</strong> {{ $service->description ?? '-' }}</li>
+            <li><strong>Vehicle Type:</strong>
+                @if ($service->vehicle_type === 'both')
+                    Car & Truck
+                @else
+                    {{ ucfirst($service->vehicle_type) }}
+                @endif
+            </li>
+            <li><strong>Base Price:</strong> Rp {{ number_format($service->base_price, 0, ',', '.') }}</li>
+            <li><strong>Estimated Duration:</strong> {{ $service->estimated_duration }} minutes</li>
+        </ul>
+    </div>
+</div>
+<form action="{{ route('landing.booking.store') }}" method="post" id="ajxForm" data-ajxForm-reset="false">
     @csrf
+    <input type="hidden" name="service_id" value="{{ $service->id }}">
     <div class="card-body">
         <div class="form-group mb-3 row">
             <label class="form-label col-3 col-form-label">Customer Name *</label>

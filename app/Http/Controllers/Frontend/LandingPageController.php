@@ -17,9 +17,10 @@ class LandingPageController extends Controller
         return view('app.frontend.pages.home.index', $data);
     }
 
-    public function booking()
+    public function booking(Request $request)
     {
-        return view('app.frontend.pages.home.booking');
+        $data['service'] = Service::find($request->service_id);
+        return view('app.frontend.pages.home.booking', $data);
     }
 
     public function bookingStore(Request $request)
@@ -35,22 +36,18 @@ class LandingPageController extends Controller
             'problem_description'  => 'required|string',
             'booking_date'         => 'required|date',
             'booking_time'         => 'required|date_format:H:i',
-            'status'               => 'nullable|in:pending,approved,rejected,in_progress,completed,cancelled',
-            'admin_notes'          => 'nullable|string',
-            'mechanic_notes'       => 'nullable|string',
+            'service_id'           => 'required|exists:services,id',
         ]);
 
         if (!$validator->passes()) {
             return Message::validator($request, $validator->errors()->first());
         }
 
-        try {
-            $lastBooking = Booking::latest()->first();
-            $nextId = $lastBooking ? $lastBooking->id + 1 : 1;
-            $bookingCode = 'BK-' . now()->format('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+        $service = Service::find($request->service_id);
 
-            Booking::create([
-                'booking_code'       => $bookingCode,
+        try {
+
+            $booking =  Booking::create([
                 'customer_name'      => $request->customer_name,
                 'customer_phone'     => $request->customer_phone,
                 'customer_email'     => $request->customer_email,
@@ -59,9 +56,10 @@ class LandingPageController extends Controller
                 'problem_description' => $request->problem_description,
                 'booking_date'       => $request->booking_date,
                 'booking_time'       => $request->booking_time,
-                'status'             => $request->status ?? 'pending',
-                'admin_notes'        => $request->admin_notes,
-                'mechanic_notes'     => $request->mechanic_notes,
+            ]);
+
+            $booking->services()->attach($service->id, [
+                'estimated_price' => $service->base_price,
             ]);
 
             DB::commit();

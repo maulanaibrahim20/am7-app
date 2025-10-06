@@ -92,6 +92,7 @@ class BookingController extends Controller
 
         $validator = Validator::make($request->all(), [
             'status' => 'required|in:pending,approved,rejected,in_progress,completed,cancelled',
+            'mechanic_id' => 'required_if:status,in_progress',
         ]);
 
         if (!$validator->passes()) {
@@ -112,6 +113,7 @@ class BookingController extends Controller
 
             if ($request->status === 'in_progress' && !$booking->started_at) {
                 $booking->started_at = now();
+                $booking->mechanic_id = $request->mechanic_id;
             }
 
             if ($request->status === 'completed' && !$booking->completed_at) {
@@ -126,6 +128,34 @@ class BookingController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return Message::exception($request, $e, "Failed to update booking status. " . $e->getMessage());
+        }
+    }
+
+    public function notes(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'admin_notes' => 'required_if:mechanic_notes,null',
+            'mechanic_notes' => 'required_if:admin_notes,null',
+        ]);
+
+        if (!$validator->passes()) {
+            return Message::validator($request, $validator->errors()->first());
+        }
+
+        try {
+            $booking = Booking::findOrFail($id);
+
+            if ($request->type == 'admin_notes') {
+                $booking->admin_notes = $request->admin_notes;
+            } else {
+                $booking->mechanic_notes = $request->mechanic_notes;
+            }
+
+            $booking->save();
+
+            return Message::updated($request, "Notes updated");
+        } catch (\Exception $e) {
+            return Message::exception($request, $e, "Failed to update notes. " . $e->getMessage());
         }
     }
 }

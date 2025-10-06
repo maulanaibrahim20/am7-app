@@ -101,7 +101,7 @@
                              timer: 1500,
                              showConfirmButton: false
                          }).then(() => {
-                             window.location.href = response.redirect ?? '/~admin';
+                             window.location.href = response.redirect ?? '/~admin/dashboard';
                          });
                      } else {
                          Swal.fire({

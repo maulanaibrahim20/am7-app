@@ -204,29 +204,25 @@
                 <h6 class="text-primary text-uppercase">// Our Services //</h6>
                 <h1 class="mb-5">Explore Our Services</h1>
             </div>
-            <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
-                <!-- Sidebar Tab Buttons -->
-                <div class="col-lg-4">
-                    <div class="nav w-100 nav-pills me-4">
-                        @foreach ($services as $index => $service)
-                            <button
-                                class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 {{ $index == 0 ? 'active' : '' }}"
-                                data-bs-toggle="pill" data-bs-target="#tab-pane-{{ $service->id }}" type="button">
-                                <i class="fa fa-cogs fa-2x me-3"></i>
-                                <h4 class="m-0">{{ $service->name }}</h4>
-                            </button>
-                        @endforeach
-                    </div>
-                </div>
 
-                <!-- Tab Content -->
-                <div class="col-lg-8">
-                    <div class="tab-content w-100">
-                        @foreach ($services as $index => $service)
-                            <div class="tab-pane fade {{ $index == 0 ? 'show active' : '' }}"
-                                id="tab-pane-{{ $service->id }}">
+            <div class="accordion" id="servicesAccordion">
+                @foreach ($services as $index => $service)
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading-{{ $service->id }}">
+                            <button class="accordion-button {{ $index != 0 ? 'collapsed' : '' }}" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse-{{ $service->id }}"
+                                aria-expanded="{{ $index == 0 ? 'true' : 'false' }}"
+                                aria-controls="collapse-{{ $service->id }}">
+                                <i class="fa fa-cogs fa-lg me-2 text-primary"></i>
+                                {{ $service->name }}
+                            </button>
+                        </h2>
+                        <div id="collapse-{{ $service->id }}"
+                            class="accordion-collapse collapse {{ $index == 0 ? 'show' : '' }}"
+                            aria-labelledby="heading-{{ $service->id }}" data-bs-parent="#servicesAccordion">
+                            <div class="accordion-body">
                                 <div class="row g-4">
-                                    <div class="col-md-6" style="min-height: 350px;">
+                                    <div class="col-md-6" style="min-height: 250px;">
                                         <div class="position-relative h-100">
                                             <img class="position-absolute img-fluid w-100 h-100"
                                                 src="{{ asset('landing/img/service-' . (($index % 4) + 1) . '.jpg') }}"
@@ -244,7 +240,7 @@
                                             {{ $service->estimated_duration }} minutes</p>
                                         <p><i class="fa fa-check text-success me-3"></i>Vehicle Type:
                                             {{ ucfirst($service->vehicle_type) }}</p>
-                                        <a href="{{ route('booking.index', ['service_id' => $service->id]) }}"
+                                        <a href="{{ route('landing.booking.create', ['service_id' => $service->id]) }}"
                                             class="btn btn-primary py-3 px-5 mt-3" data-toggle="ajaxModal"
                                             data-title="User | Add New" data-size="lg">
                                             Book Now <i class="fa fa-arrow-right ms-3"></i>
@@ -252,9 +248,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

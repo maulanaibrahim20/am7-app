@@ -4,7 +4,7 @@
             <h5 class="mb-0">
                 <i class="ti ti-clock"></i> Held Transactions
             </h5>
-            <a href="{{ url('cashier.index') }}" class="btn btn-dark btn-sm">
+            <a href="{{ route('cashier') }}" class="btn btn-dark btn-sm">
                 <i class="ti ti-arrow-left"></i> Back to Cashier
             </a>
         </div>

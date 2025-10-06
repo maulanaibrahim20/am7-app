@@ -141,6 +141,7 @@
                         <form action="{{ route('booking.updateStatus', $booking->id) }}" method="POST" id="ajxForm"
                             data-ajxForm-reset="false" class="d-inline">
                             @csrf
+                            <input type="hidden" name="status" value="approved">
                             <button type="submit" class="btn btn-success">
                                 <i class="fas fa-check me-2"></i>Approve Booking
                             </button>
@@ -148,6 +149,7 @@
                         <form action="{{ route('booking.updateStatus', $booking->id) }}" method="POST" id="ajxForm"
                             data-ajxForm-reset="false" class="d-inline">
                             @csrf
+                            <input type="hidden" name="status" value="rejected">
                             <button type="submit" class="btn btn-danger"
                                 onclick="return confirm('Are you sure want to reject this booking?')">
                                 <i class="fas fa-times me-2"></i>Reject Booking
@@ -164,9 +166,10 @@
                     <h6 class="text-info mb-3">
                         <i class="fas fa-user-cog me-2"></i>Assign Mechanic & Start Work
                     </h6>
-                    <form action="{{ url('booking.assign-mechanic', $booking->id) }}" method="POST" id="ajxForm"
+                    <form action="{{ route('booking.updateStatus', $booking->id) }}" method="POST" id="ajxForm"
                         data-ajxForm-reset="false" class="d-inline">
                         @csrf
+                        <input type="hidden" name="status" value="in_progress">
                         <div class="row g-3">
                             <div class="col-md-8">
                                 <select name="mechanic_id" class="form-select" required>
@@ -193,8 +196,10 @@
                     <h6 class="text-success mb-3">
                         <i class="fas fa-flag-checkered me-2"></i>Complete Booking
                     </h6>
-                    <form action="{{ url('booking.complete', $booking->id) }}" method="POST" id="ajxFormComplete">
+                    <form action="{{ route('booking.updateStatus', $booking->id) }}" method="POST" id="ajxForm"
+                        data-ajxForm-reset="false">
                         @csrf
+                        <input type="hidden" name="status" value="completed">
                         <button type="submit" class="btn btn-success"
                             onclick="return confirm('Mark this booking as completed?')">
                             <i class="fas fa-check-double me-2"></i>Mark as Completed
@@ -258,16 +263,10 @@
         <!-- Services/Parts Used Section -->
         @if (in_array($booking->status, ['in_progress', 'completed']))
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center mb-4">
                     <h6 class="mb-0">
                         <i class="fas fa-list me-2"></i>Services & Parts Used
                     </h6>
-                    @if ($booking->status == 'in_progress')
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#addServiceModal">
-                            <i class="fas fa-plus me-1"></i>Add Item
-                        </button>
-                    @endif
                 </div>
                 <div class="card-body">
                     @if (isset($booking->services) && $booking->services->count() > 0)
@@ -275,52 +274,21 @@
                             <table class="table table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Service/Part</th>
-                                        <th class="text-center">Quantity</th>
+                                        <th>Service</th>
+                                        <th>Description</th>
                                         <th class="text-end">Price</th>
-                                        <th class="text-end">Subtotal</th>
-                                        @if ($booking->status == 'in_progress')
-                                            <th class="text-center">Action</th>
-                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @php $total = 0; @endphp
                                     @foreach ($booking->services as $service)
-                                        @php
-                                            $subtotal = $service->pivot->quantity * $service->pivot->price;
-                                            $total += $subtotal;
-                                        @endphp
                                         <tr>
                                             <td>{{ $service->name }}</td>
-                                            <td class="text-center">{{ $service->pivot->quantity }}</td>
+                                            <td>{{ $service->description }}</td>
                                             <td class="text-end">Rp
-                                                {{ number_format($service->pivot->price, 0, ',', '.') }}</td>
-                                            <td class="text-end">Rp {{ number_format($subtotal, 0, ',', '.') }}</td>
-                                            @if ($booking->status == 'in_progress')
-                                                <td class="text-center">
-                                                    <form
-                                                        action="{{ url('booking.remove-service', [$booking->id, $service->id]) }}"
-                                                        method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Remove this item?')">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            @endif
+                                                {{ number_format($service->base_price, 0, ',', '.') }}</td>
                                         </tr>
                                     @endforeach
-                                    <tr class="table-light fw-bold">
-                                        <td colspan="{{ $booking->status == 'in_progress' ? 3 : 3 }}"
-                                            class="text-end">Total:</td>
-                                        <td class="text-end">Rp {{ number_format($total, 0, ',', '.') }}</td>
-                                        @if ($booking->status == 'in_progress')
-                                            <td></td>
-                                        @endif
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -356,92 +324,46 @@
                         </button>
                     </li>
                 </ul>
-
                 <div class="tab-content" id="notesTabContent">
                     <div class="tab-pane fade show active" id="adminNotes" role="tabpanel">
-                        <form action="{{ url('booking.notes.admin', $booking->id) }}" method="POST"
-                            id="ajxFormAdminNotes">
+                        <form action="{{ route('booking.updateNote', ['type' => 'admin_notes', $booking->id]) }}"
+                            method="POST"id="ajxForm" data-ajxForm-reset="false">
                             @csrf
+                            @method('PUT')
                             <div class="mb-3">
-                                <textarea name="admin_notes" class="form-control" rows="4" placeholder="Add admin notes here...">{{ $booking->admin_notes }}</textarea>
+                                <textarea name="admin_notes" class="form-control" rows="4" placeholder="Add admin notes here..."
+                                    @if ($booking->status == 'completed') readonly @endif>{{ $booking->admin_notes }}</textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-2"></i>Save Admin Notes
-                            </button>
+                            @if ($booking->status != 'completed')
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>Save Admin Notes
+                                </button>
+                            @endif
                         </form>
                     </div>
-
                     <div class="tab-pane fade" id="mechanicNotes" role="tabpanel">
-                        <form action="{{ url('booking.notes.mechanic', $booking->id) }}" method="POST"
-                            id="ajxFormMechanicNotes">
+                        <form action="{{ route('booking.updateNote', ['type' => 'mechanic_notes', $booking->id]) }}"
+                            method="POST" id="ajxForm" data-ajxForm-reset="false">
                             @csrf
+                            @method('PUT')
                             <div class="mb-3">
-                                <textarea name="mechanic_notes" class="form-control" rows="4" placeholder="Add mechanic notes here...">{{ $booking->mechanic_notes }}</textarea>
+                                <textarea name="mechanic_notes" class="form-control" rows="4" placeholder="Add mechanic notes here..."
+                                    @if ($booking->status == 'completed') readonly @endif>{{ $booking->mechanic_notes }}</textarea>
                             </div>
-                            <button type="submit" class="btn btn-warning">
-                                <i class="fas fa-save me-2"></i>Save Mechanic Notes
-                            </button>
+                            @if ($booking->status != 'completed')
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-save me-2"></i>Save Mechanic Notes
+                                </button>
+                            @endif
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal: Add Service/Part -->
-<div class="modal fade" id="addServiceModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">
-                    <i class="fas fa-plus-circle me-2"></i>Add Service/Part
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <form action="{{ url('booking.add-service', $booking->id) }}" method="POST" id="ajxFormAddService">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label">Service/Part <span class="text-danger">*</span></label>
-                        <select name="service_id" class="form-select" required>
-                            <option value="">Select Service/Part</option>
-                            @foreach ($services ?? [] as $service)
-                                <option value="{{ $service->id }}" data-price="{{ $service->price }}">
-                                    {{ $service->name }} - Rp {{ number_format($service->price, 0, ',', '.') }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Quantity <span class="text-danger">*</span></label>
-                        <input type="number" name="quantity" class="form-control" min="1" value="1"
-                            required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Price <span class="text-danger">*</span></label>
-                        <input type="number" name="price" class="form-control" min="0" step="0.01"
-                            required>
-                        <small class="text-muted">Price will be auto-filled when selecting service/part</small>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Notes</label>
-                        <textarea name="notes" class="form-control" rows="2" placeholder="Optional notes"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save me-2"></i>Add Item
-                    </button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
 
 <script>
-    // Auto-fill price when service is selected
     document.addEventListener('DOMContentLoaded', function() {
         const serviceSelect = document.querySelector('select[name="service_id"]');
         const priceInput = document.querySelector('input[name="price"]');

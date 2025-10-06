@@ -17,13 +17,12 @@
             </div>
             <div class="h-100 d-inline-flex align-items-center">
                 <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
-                        class="fab fa-facebook-f"></i></a>
+                        class="fa fa-facebook-f"></i></a>
+                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i class="fa fa-twitter"></i></a>
                 <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
-                        class="fab fa-twitter"></i></a>
-                <a class="btn btn-sm-square bg-white text-primary me-1" href=""><i
-                        class="fab fa-linkedin-in"></i></a>
+                        class="fa fa-linkedin-in"></i></a>
                 <a class="btn btn-sm-square bg-white text-primary me-0" href=""><i
-                        class="fab fa-instagram"></i></a>
+                        class="fa fa-instagram"></i></a>
             </div>
         </div>
     </div>

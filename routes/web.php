@@ -24,16 +24,14 @@ use App\Http\Controllers\CashierController;
 use App\Http\Controllers\Frontend\LandingPageController;
 
 Route::middleware('guest')->group(function () {
-    Route::group(['controller' => LandingPageController::class], function () {
-        Route::get('/', [LandingPageController::class, 'home'])->name('home');
-        Route::get('/booking', [LandingPageController::class, 'booking'])->name('booking.create');
-        Route::post('/booking/store', [LandingPageController::class, 'bookingStore'])->name('booking.store');
-
-
-        Route::get('/about', [LandingPageController::class, 'about'])->name('about');
-        Route::get('/services', [LandingPageController::class, 'services'])->name('services');
-        Route::get('/contact', [LandingPageController::class, 'contact'])->name('contact');
-    })->name('landing.');
+    Route::prefix('/')->name('landing.')->controller(LandingPageController::class)->group(function () {
+        Route::get('/', 'home')->name('home');
+        Route::get('/booking', 'booking')->name('booking.create');
+        Route::post('/booking/store', 'bookingStore')->name('booking.store');
+        Route::get('/about', 'about')->name('about');
+        Route::get('/services', 'services')->name('services');
+        Route::get('/contact', 'contact')->name('contact');
+    });
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -152,13 +150,9 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
     Route::prefix('booking')->controller(BookingController::class)->name('booking.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/getData', 'getData')->name('getData');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/store', 'store')->name('store');
         Route::get('/show/{id}', 'show')->name('show');
         Route::post('/updateStatus/{id}', 'updateStatus')->name('updateStatus');
-        Route::get('/edit/{id}', 'edit')->name('edit');
-        Route::put('/update/{id}', 'update')->name('update');
-        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        Route::put('/updateNote/{id}', 'notes')->name('updateNote');
     });
 
     Route::prefix('master')->name('master.')->group(function () {
