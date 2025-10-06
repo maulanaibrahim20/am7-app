@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Auth, DB, Hash, Validator};
+use Illuminate\Support\Facades\{DB, Hash, Validator};
 use App\Facades\Message;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
-class AdminController extends Controller
+class UserCashierController extends Controller
 {
     protected $user;
     public function __construct()
@@ -19,21 +18,21 @@ class AdminController extends Controller
     }
     public function index()
     {
-        return view('app.backend.pages.user.admin.index');
+        return view('app.backend.pages.user.cashier.index');
     }
 
     public function getData(Request $request)
     {
         $rows = $this->user->select(['*'])->orderBy('id', 'desc')->whereHas('roles', function ($query) {
-            $query->where('name', 'admin');
+            $query->where('name', 'cashier');
         });
 
         return DataTables::of($rows)
             ->addIndexColumn()
             ->editColumn('name', function ($row) {
-                $url = route('user.admin.show', $row->id);
+                $url = route('user.cashier.show', $row->id);
                 return '<a href="' . $url . '" class="text-primary text-decoration-none" data-toggle="ajaxModal"
-                data-title="Detail | User">' . $row->name . '</a>';
+                data-title="Detail | Cashier ' . $row->name . '">' . $row->name . '</a>';
             })
             ->editColumn('is_active', function ($row) {
                 return $row->is_active
@@ -49,13 +48,12 @@ class AdminController extends Controller
                 return $row->created_at ? $row->created_at->format('d M Y H:i') : '-';
             })
             ->addColumn('action', function ($row) {
-                $editUrl = route('user.admin.edit', $row->id);
+                $editUrl = route('user.cashier.edit', $row->id);
 
                 return '
-                <a href="' . $editUrl . '" class="btn btn-warning" data-toggle="ajaxModal" data-title="User | Edit">
+                <a href="' . $editUrl . '" class="btn btn-warning" data-toggle="ajaxModal" data-title="Cashier | Edit">
                     <i class="fas fa-pencil me-1"></i>
                 </a>
-
             ';
             })
             ->rawColumns(['is_active', 'is_verified', 'action', 'name'])
@@ -64,7 +62,7 @@ class AdminController extends Controller
 
     public function create()
     {
-        return view('app.backend.pages.user.admin.create');
+        return view('app.backend.pages.user.cashier.create');
     }
 
     public function store(Request $request)
@@ -97,7 +95,7 @@ class AdminController extends Controller
                 'email_verified_at' => $verifiedAt,
             ]);
 
-            $user->assignRole('admin');
+            $user->assignRole('cashier');
 
             DB::commit();
 
@@ -112,14 +110,14 @@ class AdminController extends Controller
     {
         $data['user'] = User::where('id', $id)->firstOrFail();
 
-        return view('app.backend.pages.user.admin.show', $data);
+        return view('app.backend.pages.user.cashier.show', $data);
     }
 
     public function edit($id)
     {
         $data['user'] = $this->user->where('id', $id)->firstOrFail();
 
-        return view('app.backend.pages.user.admin.edit', $data);
+        return view('app.backend.pages.user.cashier.edit', $data);
     }
 
     public function update(Request $request, $id)

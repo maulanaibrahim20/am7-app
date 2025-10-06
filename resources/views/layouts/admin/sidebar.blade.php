@@ -29,57 +29,97 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Main</span>
         </li>
-        <li class="menu-item {{ Request::segment(1) == '' ? 'active' : '' }}">
+        <li class="menu-item {{ Request::segment(2) == 'dashboard' ? 'active' : '' }}">
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-home"></i>
                 <div>Dashboard</div>
             </a>
         </li>
-        <li class="menu-item {{ Request::segment(2) == 'user' ? 'active' : '' }}">
-            <a href="{{ route('user.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-user"></i>
-                <div>User</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Request::segment(2) == 'product' ? 'active' : '' }}">
-            <a href="{{ route('product.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-package"></i>
-                <div>Product</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Request::segment(2) == 'service' ? 'active' : '' }}">
-            <a href="{{ route('service.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-server-2"></i>
-                <div>Service</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Request::segment(2) == 'customer' ? 'active' : '' }}">
-            <a href="{{ route('customer.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-users"></i>
-                <div>Customer</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Request::segment(2) == 'cashier' ? 'active' : '' }}">
-            <a href="{{ route('cashier') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-cash"></i>
-                <div>Cashier</div>
-            </a>
-        </li>
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Master</span>
-        </li>
-        <li class="menu-item {{ Request::segment(3) == 'category' ? 'active' : '' }}">
-            <a href="{{ route('master.category.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-category"></i>
-                <div>Category</div>
-            </a>
-        </li>
-        <li class="menu-item {{ Request::segment(3) == 'supplier' ? 'active' : '' }}">
-            <a href="{{ route('master.supplier.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-truck-delivery"></i>
-                <div>Supplier</div>
-            </a>
-        </li>
+        @role('admin')
+            <li class="menu-item {{ Request::segment(2) == 'user' ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-user"></i>
+                    <div>User</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::segment(3) == 'admin' ? 'active' : '' }}">
+                        <a href="{{ route('user.admin.index') }}" class="menu-link">
+                            <div>Admin</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::segment(3) == 'staff' ? 'active' : '' }}">
+                        <a href="{{ route('user.staff.index') }}" class="menu-link">
+                            <div>Staff</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::segment(3) == 'cashier' ? 'active' : '' }}">
+                        <a href="{{ route('user.cashier.index') }}" class="menu-link">
+                            <div>Cashier</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::segment(3) == 'mechanic' ? 'active' : '' }}">
+                        <a href="{{ route('user.mechanic.index') }}" class="menu-link">
+                            <div>Mechanic</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'product' ? 'active' : '' }}">
+                <a href="{{ route('product.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-package"></i>
+                    <div>Product</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'service' ? 'active' : '' }}">
+                <a href="{{ route('service.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-server-2"></i>
+                    <div>Service</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'customer' ? 'active' : '' }}">
+                <a href="{{ route('customer.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-users"></i>
+                    <div>Customer</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'booking' ? 'active' : '' }}">
+                <a href="{{ route('booking.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-book"></i>
+                    <div>Booking</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'cashier' ? 'active' : '' }}">
+                <a href="{{ route('cashier') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-cash"></i>
+                    <div>Cashier</div>
+                </a>
+            </li>
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Master</span>
+            </li>
+            <li class="menu-item {{ Request::segment(3) == 'category' ? 'active' : '' }}">
+                <a href="{{ route('master.category.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-category"></i>
+                    <div>Category</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::segment(3) == 'supplier' ? 'active' : '' }}">
+                <a href="{{ route('master.supplier.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-truck-delivery"></i>
+                    <div>Supplier</div>
+                </a>
+            </li>
+        @endrole
+        @role('cashier')
+            <li class="menu-item {{ Request::segment(2) == 'cashier' ? 'active' : '' }}">
+                <a href="{{ route('cashier') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-cash"></i>
+                    <div>Cashier</div>
+                </a>
+            </li>
+        @endrole
+        @role('staff')
+        @endrole
     </ul>
     <div class="menu-footer border-top py-3 px-3">
         <div class="d-flex align-items-center">

@@ -1,4 +1,4 @@
-<form action="{{ route('user.store') }}" method="post" id="ajxForm" data-ajxForm-reset="false">
+<form action="{{ route('user.admin.store') }}" method="post" id="ajxForm" data-ajxForm-reset="false">
     @csrf
 
     <div class="form-group mb-3 row">
@@ -29,19 +29,6 @@
         <div class="col">
             <input type="text" class="form-control" placeholder="Enter phone number" name="phone"
                 value="{{ old('phone') }}" maxlength="20" />
-        </div>
-    </div>
-
-    <div class="form-group mb-3 row">
-        <label class="form-label col-3 col-form-label">Select Role</label>
-        <div class="col">
-            <select class="form-select" name="role_id" aria-label="Default select example">
-                @forelse ($role as $roles)
-                    <option value="{{ $roles->name }}">{{ $roles->name }}</option>
-                @empty
-                    <p>empty</p>
-                @endforelse
-            </select>
         </div>
     </div>
 

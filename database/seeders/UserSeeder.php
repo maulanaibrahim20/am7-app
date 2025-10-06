@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'admin',
             'staff',
             'cashier',
+            'mechanic'
         ];
 
         foreach ($roles as $role) {
@@ -46,5 +47,12 @@ class UserSeeder extends Seeder
         ]);
 
         $cashier->assignRole('cashier');
+
+        $mechanic = User::factory()->create([
+            'name' => 'mechanic',
+            'email' => 'mechanic@mailinator.com',
+        ]);
+
+        $mechanic->assignRole('mechanic');
     }
 }

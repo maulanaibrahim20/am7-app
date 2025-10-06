@@ -1,8 +1,8 @@
 @extends('layouts.admin.main')
-@section('breadcrumb', 'User Management')
+@section('breadcrumb', 'Staff Management')
 @section('page_nav_button')
-    <a href="{{ route('user.create') }}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal"
-        data-title="User | Add New">
+    <a href="{{ route('user.staff.create') }}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal"
+        data-title="Staff | Add New">
         Add New
     </a>
 @endsection
@@ -12,11 +12,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="col-12 text-end">
-                        <a href="{{ route('user.filter') }}" data-toggle="ajaxOffcanvas" data-title="User | Add New"
+                        <a href="{{ route('user.staff.filter') }}" data-toggle="ajaxOffcanvas" data-title="Admin | Add New"
                             data-size="end" class="fas fa-filter text-secondary fs-4">
                         </a>
                     </div>
-                    <table id="dataTbl" class="table table-responsive" data-ajax="{{ route('user.getData') }}"
+                    <table id="dataTbl" class="table table-responsive" data-ajax="{{ route('user.staff.getData') }}"
                         data-processing="true" data-server-side="true" data-length-menu="[10, 25, 50, 75, 100]"
                         data-ordering="true" data-col-reorder="true">
                         <thead>

@@ -142,6 +142,12 @@ class ServiceController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $data['service'] = Service::findOrFail($id);
+        return view('app.backend.pages.services.show', $data);
+    }
+
     public function edit($id)
     {
         $data['service'] = Service::with('category')->findOrFail($id);

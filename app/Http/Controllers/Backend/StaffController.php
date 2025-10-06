@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Auth, DB, Hash, Validator};
 use App\Facades\Message;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{DB, Hash, Validator};
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
-use Yajra\DataTables\Facades\DataTables;
+use Yajra\DataTables\DataTables;
 
-class UserController extends Controller
+class StaffController extends Controller
 {
     protected $user;
     public function __construct()
@@ -19,19 +18,21 @@ class UserController extends Controller
     }
     public function index()
     {
-        return view('app.backend.pages.user.index');
+        return view('app.backend.pages.user.staff.index');
     }
 
     public function getData(Request $request)
     {
-        $rows = $this->user->select(['*'])->where('id', '!=', Auth::id())->orderBy('id', 'desc');
+        $rows = $this->user->select(['*'])->orderBy('id', 'desc')->whereHas('roles', function ($query) {
+            $query->where('name', 'staff');
+        });
 
         return DataTables::of($rows)
             ->addIndexColumn()
             ->editColumn('name', function ($row) {
-                $url = route('user.show', $row->id);
+                $url = route('user.staff.show', $row->id);
                 return '<a href="' . $url . '" class="text-primary text-decoration-none" data-toggle="ajaxModal"
-                data-title="Detail | User">' . $row->name . '</a>';
+                data-title="Detail | Staff ' . $row->name . '">' . $row->name . '</a>';
             })
             ->editColumn('is_active', function ($row) {
                 return $row->is_active
@@ -47,13 +48,12 @@ class UserController extends Controller
                 return $row->created_at ? $row->created_at->format('d M Y H:i') : '-';
             })
             ->addColumn('action', function ($row) {
-                $editUrl = route('user.edit', $row->id);
+                $editUrl = route('user.staff.edit', $row->id);
 
                 return '
-                <a href="' . $editUrl . '" class="btn btn-warning" data-toggle="ajaxModal" data-title="User | Edit">
+                <a href="' . $editUrl . '" class="btn btn-warning" data-toggle="ajaxModal" data-title="Staff | Edit">
                     <i class="fas fa-pencil me-1"></i>
                 </a>
-
             ';
             })
             ->rawColumns(['is_active', 'is_verified', 'action', 'name'])
@@ -62,15 +62,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $user = Auth::user();
-        $query = Role::where('guard_name', 'web');
-
-        if (!$user->hasRole('admin')) {
-            $query->where('name', '!=', 'admin');
-        }
-
-        $data['role'] = $query->get();
-        return view('app.backend.pages.user.create', $data);
+        return view('app.backend.pages.user.staff.create');
     }
 
     public function store(Request $request)
@@ -103,7 +95,7 @@ class UserController extends Controller
                 'email_verified_at' => $verifiedAt,
             ]);
 
-            $user->assignRole($request->role_id);
+            $user->assignRole('staff');
 
             DB::commit();
 
@@ -118,15 +110,14 @@ class UserController extends Controller
     {
         $data['user'] = User::where('id', $id)->firstOrFail();
 
-        return view('app.backend.pages.user.show', $data);
+        return view('app.backend.pages.user.staff.show', $data);
     }
 
     public function edit($id)
     {
         $data['user'] = $this->user->where('id', $id)->firstOrFail();
-        $data['role'] = Role::where('guard_name', 'web')->get();
 
-        return view('app.backend.pages.user.edit', $data);
+        return view('app.backend.pages.user.staff.edit', $data);
     }
 
     public function update(Request $request, $id)
@@ -140,7 +131,6 @@ class UserController extends Controller
             'phone'             => 'nullable|string|max:20',
             'is_active'         => 'nullable|boolean',
             'email_verified'    => 'nullable|boolean',
-            'role_id'           => 'required',
         ]);
 
         if (!$validator->passes()) {
@@ -166,8 +156,6 @@ class UserController extends Controller
             }
 
             $user->update($dataUpdate);
-
-            $user->syncRoles([$request->role_id]);
 
             DB::commit();
 

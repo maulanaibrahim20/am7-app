@@ -3,11 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\{
     AdminController,
+    BookingController,
     CategoryController,
     CustomerController,
+    DashboardController,
+    MechanicController,
     ProductController,
     ServiceController,
+    StaffController,
     SupplierController,
+    UserCashierController,
     UserController
 };
 use App\Http\Controllers\Backend\Auth\{
@@ -19,15 +24,16 @@ use App\Http\Controllers\CashierController;
 use App\Http\Controllers\Frontend\LandingPageController;
 
 Route::middleware('guest')->group(function () {
+    Route::group(['controller' => LandingPageController::class], function () {
+        Route::get('/', [LandingPageController::class, 'home'])->name('home');
+        Route::get('/booking', [LandingPageController::class, 'booking'])->name('booking.create');
+        Route::post('/booking/store', [LandingPageController::class, 'bookingStore'])->name('booking.store');
 
-    Route::get('/', [LandingPageController::class, 'home'])->name('home');
-    Route::get('/booking', [LandingPageController::class, 'booking'])->name('booking.index');
-    Route::post('/booking/store', [LandingPageController::class, 'bookingStore'])->name('booking.store');
 
-
-    Route::get('/about', [LandingPageController::class, 'about'])->name('about');
-    Route::get('/services', [LandingPageController::class, 'services'])->name('services');
-    Route::get('/contact', [LandingPageController::class, 'contact'])->name('contact');
+        Route::get('/about', [LandingPageController::class, 'about'])->name('about');
+        Route::get('/services', [LandingPageController::class, 'services'])->name('services');
+        Route::get('/contact', [LandingPageController::class, 'contact'])->name('contact');
+    })->name('landing.');
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -50,7 +56,7 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
     Route::get('/cashier/hold', [CashierController::class, 'holdModal'])->name('cashier.holdModal');
     Route::post('/cashier/hold-cart', [CashierController::class, 'holdCart'])->name('cashier.hold-cart');
 
-    Route::get('/cashier/held', [CashierController::class, 'heldCarts'])->name('cashier.held-carts');
+    Route::get('/cashier/held-cart', [CashierController::class, 'heldCarts'])->name('cashier.held-carts');
     Route::post('/cashier/resume-cart/{session_code}', [CashierController::class, 'resumeCart'])->name('cashier.resume-cart');
     Route::post('/cashier/cancel-cart/{session_code}', [CashierController::class, 'cancelCart'])->name('cashier.cancel-cart');
 
@@ -59,18 +65,53 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
     Route::get('/cashier/checkout/invoice/{id}', [CashierController::class, 'invoice'])->name('cashier.invoice');
     Route::get('/cashier/pring/invoice/{id}', [CashierController::class, 'printInvoice'])->name('cashier.printInvoice');
 
-    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('user')->name('user.')->controller(UserController::class)->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::get('/getData', 'getData')->name('getData');
-        Route::get('/create', 'create')->name('create');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/show/{id}', 'show')->name('show');
-        Route::get('/filter', 'filter')->name('filter');
-        Route::get('/edit/{id}', 'edit')->name('edit');
-        Route::put('/update/{id}', 'update')->name('update');
-        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::prefix('admin')->name('admin.')->controller(AdminController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getData', 'getData')->name('getData');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::get('/filter', 'filter')->name('filter');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        });
+        Route::prefix('staff')->name('staff.')->controller(StaffController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getData', 'getData')->name('getData');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::get('/filter', 'filter')->name('filter');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        });
+        Route::prefix('cashier')->name('cashier.')->controller(UserCashierController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getData', 'getData')->name('getData');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::get('/filter', 'filter')->name('filter');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        });
+        Route::prefix('mechanic')->name('mechanic.')->controller(MechanicController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getData', 'getData')->name('getData');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::get('/filter', 'filter')->name('filter');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        });
     });
 
     Route::prefix('product')->controller(ProductController::class)->name('product.')->group(function () {
@@ -103,6 +144,18 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
         Route::get('/create', 'create')->name('create');
         Route::post('/store', 'store')->name('store');
         Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::put('/update/{id}', 'update')->name('update');
+        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('booking')->controller(BookingController::class)->name('booking.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/getData', 'getData')->name('getData');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/updateStatus/{id}', 'updateStatus')->name('updateStatus');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::put('/update/{id}', 'update')->name('update');
         Route::delete('/delete/{id}', 'destroy')->name('destroy');
