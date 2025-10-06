@@ -19,7 +19,23 @@ class BookingController extends Controller
 
     public function getData(Request $request)
     {
-        $rows = Booking::select(['*'])->orderBy('id', 'desc');
+        $rows = Booking::query();
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $rows->whereBetween('booking_date', [$request->start_date, $request->end_date]);
+        } elseif ($request->filled('start_date')) {
+            $rows->whereDate('booking_date', '>=', $request->start_date);
+        } elseif ($request->filled('end_date')) {
+            $rows->whereDate('booking_date', '<=', $request->end_date);
+        } else {
+            $rows->whereDate('booking_date', Carbon::today());
+        }
+
+        if ($request->filled('status')) {
+            $rows->where('status', $request->status);
+        }
+
+        $rows->where('booking_date', '>=', Carbon::today())->orderByDesc('id');
 
         return DataTables::of($rows)
             ->addIndexColumn()
@@ -30,49 +46,34 @@ class BookingController extends Controller
                 data-size="xl" data-toggle="ajaxModal"
                 data-title="Booking Service ' . $bookingCode . '">' . $bookingCode . '</a>';
             })
-            ->editColumn('booking_date', function ($row) {
-                return $row->booking_date ? Carbon::parse($row->booking_date)->format('d M Y') : '-';
-            })
-            ->editColumn('booking_time', function ($row) {
-                return $row->booking_time ? Carbon::parse($row->booking_time)->format('H:i') : '-';
-            })
-            ->editColumn('status', function ($row) {
-                $statusColors = [
-                    'pending'     => 'secondary',
-                    'approved'    => 'info',
-                    'rejected'    => 'danger',
+            ->editColumn('booking_date', fn($r) => $r->booking_date ? Carbon::parse($r->booking_date)->format('d M Y') : '-')
+            ->editColumn('booking_time', fn($r) => $r->booking_time ? Carbon::parse($r->booking_time)->format('H:i') : '-')
+            ->editColumn('status', function ($r) {
+                $color = [
+                    'pending' => 'secondary',
+                    'approved' => 'info',
+                    'rejected' => 'danger',
                     'in_progress' => 'warning',
-                    'completed'   => 'success',
-                    'cancelled'   => 'dark',
-                ];
-                $color = $statusColors[$row->status] ?? 'secondary';
-                return '<span class="badge bg-' . $color . '">' . ucfirst(str_replace('_', ' ', $row->status)) . '</span>';
+                    'completed' => 'success',
+                    'cancelled' => 'dark',
+                ][$r->status] ?? 'secondary';
+                return '<span class="badge bg-' . $color . '">' . ucfirst(str_replace('_', ' ', $r->status)) . '</span>';
             })
-            ->editColumn('created_at', function ($row) {
-                return $row->created_at ? $row->created_at->format('d M Y H:i') : '-';
-            })
-            ->addColumn('action', function ($row) {
-                if ($row->status === 'in_progress') {
-                    $deleteUrl = route('booking.loadFromBooking', $row->id);
-
-                    return '
-                    <div class="d-flex justify-content-start gap-1">
-                        <form action="' . $deleteUrl . '" method="POST"
-                            class="m-0 p-0">
-                            ' . csrf_field() . '
-                            <button type="submit" class="btn btn-info">
-                                <i class="fas fa-share me-3"></i> Process to cashier
-                            </button>
-                        </form>
-                    </div>
-                ';
-                } else {
-                    return '<span class="badge bg-secondary">No Action</span>';
+            ->editColumn('created_at', fn($r) => $r->created_at?->format('d M Y H:i') ?? '-')
+            ->addColumn('action', function ($r) {
+                if ($r->status === 'in_progress') {
+                    $url = route('booking.loadFromBooking', $r->id);
+                    return '<form action="' . $url . '" method="POST" class="m-0 p-0">'
+                        . csrf_field()
+                        . '<button type="submit" class="btn btn-info"><i class="fas fa-share me-3"></i> Process to cashier</button>'
+                        . '</form>';
                 }
+                return '<span class="badge bg-secondary">No Action</span>';
             })
             ->rawColumns(['status', 'action', 'booking_code'])
             ->make();
     }
+
 
     public function show($id)
     {
@@ -244,5 +245,10 @@ class BookingController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', 'Gagal memproses booking: ' . $e->getMessage());
         }
+    }
+
+    public function filter()
+    {
+        return view('app.backend.pages.booking.filter');
     }
 }

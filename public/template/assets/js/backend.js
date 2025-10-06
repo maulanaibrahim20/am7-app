@@ -108,10 +108,49 @@ $(document).ready(function () {
     });
     // Start ADD BY MAUL
     table.on("preXhr.dt", function (e, settings, data) {
-        data.start_date = $("#start_date").val();
-        data.end_date = $("#end_date").val();
-        data.status = $("#status").val();
+        const f = window.bookingFilter || {};
+        data.start_date = f.start_date || "";
+        data.end_date = f.end_date || "";
+        data.status = f.status || "";
     });
+
+    // === GLOBAL FILTER HANDLER ===
+    $(document).on("click", "#btn-apply-filter", function (e) {
+        e.preventDefault();
+
+        // ambil nilai dari form filter
+        const start = $("#start_date").val();
+        const end = $("#end_date").val();
+        const status = $("#status").val();
+
+        // simpan ke localStorage / variabel global kalau mau persist
+        window.bookingFilter = {
+            start_date: start,
+            end_date: end,
+            status: status,
+        };
+
+        // reload datatable
+        $("#dataTbl").DataTable().ajax.reload();
+
+        // opsional: tutup offcanvas
+        var offcanvasEl = document.getElementById("ajaxOffcanvas");
+        var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+        offcanvas.hide();
+    });
+
+    $(document).on("click", "#btn-reset-filter", function (e) {
+        e.preventDefault();
+
+        $("#start_date").val("");
+        $("#end_date").val("");
+        $("#status").val("");
+
+        window.bookingFilter = { start_date: "", end_date: "", status: "" };
+
+        $("#dataTbl").DataTable().ajax.reload();
+    });
+
     // End ADD BY MAUL
 
     /* submit the form  */

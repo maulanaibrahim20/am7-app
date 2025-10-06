@@ -154,6 +154,7 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
         Route::post('/updateStatus/{id}', 'updateStatus')->name('updateStatus');
         Route::put('/updateNote/{id}', 'notes')->name('updateNote');
         Route::post('/loadPaymentFromBooking/{id}', 'loadFromBooking')->name('loadFromBooking');
+        Route::get('/filter', 'filter')->name('filter');
     });
 
     Route::prefix('master')->name('master.')->group(function () {
