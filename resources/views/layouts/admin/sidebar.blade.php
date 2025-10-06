@@ -94,10 +94,10 @@
                     <div>Cashier</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::segment(2) == 'transaction' ? 'active' : '' }}">
-                <a href="{{ route('cashier') }}" class="menu-link">
+            <li class="menu-item {{ Request::segment(2) == 'sale' ? 'active' : '' }}">
+                <a href="{{ route('sale.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-arrows-right-left"></i>
-                    <div>Transaction</div>
+                    <div>Sale</div>
                 </a>
             </li>
             <li class="menu-header small text-uppercase">

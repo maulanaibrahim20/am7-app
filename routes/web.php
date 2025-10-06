@@ -9,9 +9,11 @@ use App\Http\Controllers\Backend\{
     DashboardController,
     MechanicController,
     ProductController,
+    SaleController,
     ServiceController,
     StaffController,
     SupplierController,
+    TransactionController,
     UserCashierController,
     UserController
 };
@@ -148,6 +150,15 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
     });
 
     Route::prefix('booking')->controller(BookingController::class)->name('booking.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/getData', 'getData')->name('getData');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/updateStatus/{id}', 'updateStatus')->name('updateStatus');
+        Route::put('/updateNote/{id}', 'notes')->name('updateNote');
+        Route::post('/loadPaymentFromBooking/{id}', 'loadFromBooking')->name('loadFromBooking');
+        Route::get('/filter', 'filter')->name('filter');
+    });
+    Route::prefix('sale')->controller(SaleController::class)->name('sale.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/getData', 'getData')->name('getData');
         Route::get('/show/{id}', 'show')->name('show');
