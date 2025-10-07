@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'sidobe' => [
+        'secret_key' => env('SIDOBE_SECRET_KEY', '123123'),
+    ],
+
+
 ];

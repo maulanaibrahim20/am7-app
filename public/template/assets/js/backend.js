@@ -156,12 +156,32 @@ $(document).ready(function () {
     /* submit the form  */
     $(document).on("submit", "#ajxForm, #ajxForm2", function (e) {
         e.preventDefault();
-        $(this).ajaxSubmit({
-            error: showError,
-            success: showResponse,
+        var $form = $(this);
+        var $submitBtn = $form.find(":submit");
+
+        $submitBtn.prop("disabled", true);
+
+        $form.ajaxSubmit({
+            error: function (err) {
+                showError(err);
+                $submitBtn.prop("disabled", false);
+            },
+            success: function (res) {
+                showResponse(res);
+                $submitBtn.prop("disabled", false);
+            },
         });
         return false;
     });
+
+    //  $(document).on("submit", "#ajxForm, #ajxForm2", function (e) {
+    //     e.preventDefault();
+    //     $(this).ajaxSubmit({
+    //         error: showError,
+    //         success: showResponse,
+    //     });
+    //     return false;
+    // });
 
     $(document).on("submit", "#ajxFormDelete", function (e) {
         $(this).ajaxSubmit({

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('booking_code')->unique();
             $table->string('customer_name');
             $table->string('customer_phone', 20);
+            $table->string('whatsapp_id')->nullable();
             $table->string('customer_email')->nullable();
             $table->string('vehicle_type');
             $table->string('vehicle_number');

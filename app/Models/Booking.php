@@ -15,6 +15,7 @@ class Booking extends Model
         'customer_name',
         'customer_phone',
         'customer_email',
+        'whatsapp_id',
         'vehicle_type',
         'vehicle_number',
         'problem_description',

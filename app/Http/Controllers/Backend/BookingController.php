@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\{Auth, DB, Validator};
 use App\Facades\Message;
 use App\Http\Controllers\Controller;
 use App\Models\{Booking, CartItem, CartSession, Customer, User};
+use App\Services\WhatsappTemplateService;
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
 
@@ -85,7 +86,7 @@ class BookingController extends Controller
         return view('app.backend.pages.booking.show', $data);
     }
 
-    public function updateStatus(Request $request, $id)
+    public function updateStatus(Request $request, $id, WhatsappTemplateService $templateService)
     {
         DB::beginTransaction();
 
@@ -120,6 +121,21 @@ class BookingController extends Controller
             }
 
             $booking->save();
+
+            try {
+                $waResponse = $templateService->sendBookingStatusUpdated($booking);
+
+                if (!empty($waResponse['error']) && $waResponse['error'] === true) {
+                    DB::rollBack();
+                    return Message::error($request, "Booking status gagal diupdate karena WhatsApp tidak terkirim: " . $waResponse['message']);
+                }
+
+                $booking->whatsapp_id = $waResponse['data']['id'] ?? null;
+                $booking->save();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return Message::exception($request, $e, "Gagal mengirim notifikasi WhatsApp: " . $e->getMessage());
+            }
 
             DB::commit();
 
@@ -158,7 +174,7 @@ class BookingController extends Controller
         }
     }
 
-    public function loadFromBooking($bookingId)
+    public function loadFromBooking(Request $request, $bookingId, WhatsappTemplateService $templateService)
     {
         DB::beginTransaction();
         try {
@@ -168,7 +184,6 @@ class BookingController extends Controller
                 return redirect()->back()->with('error', 'Booking belum di-approve atau sudah diproses.');
             }
 
-            // Cek apakah booking sudah pernah dimuat ke cart
             $existingCart = CartSession::where('booking_id', $bookingId)
                 ->whereIn('status', ['active', 'converted'])
                 ->first();
@@ -182,7 +197,6 @@ class BookingController extends Controller
                     ->with('info', 'Booking ini sedang dalam proses.');
             }
 
-            // Cari atau buat customer
             $customer = Customer::firstOrCreate(
                 ['phone' => $booking->customer_phone],
                 [
@@ -193,7 +207,6 @@ class BookingController extends Controller
                 ]
             );
 
-            // Hold cart yang sedang aktif (jika ada)
             CartSession::where('cashier_id', Auth::id())
                 ->where('status', 'active')
                 ->update([
@@ -201,10 +214,8 @@ class BookingController extends Controller
                     'hold_at' => now(),
                 ]);
 
-            // Generate session code
             $sessionCode = CartSession::generateSessionCode();
 
-            // Buat cart session baru
             $cart = CartSession::create([
                 'session_code'   => $sessionCode,
                 'booking_id'     => $booking->id,
@@ -215,7 +226,6 @@ class BookingController extends Controller
                 'status'         => 'active',
             ]);
 
-            // Load services dari booking ke cart
             foreach ($booking->services as $service) {
                 CartItem::create([
                     'cart_session_id' => $cart->id,
@@ -235,6 +245,21 @@ class BookingController extends Controller
                 'status'     => 'completed',
                 'started_at' => now(),
             ]);
+
+            try {
+                $waResponse = $templateService->sendBookingStatusUpdated($booking);
+
+                if (!empty($waResponse['error']) && $waResponse['error'] === true) {
+                    DB::rollBack();
+                    return Message::error($request, "Booking status gagal diupdate karena WhatsApp tidak terkirim: " . $waResponse['message']);
+                }
+
+                $booking->whatsapp_id = $waResponse['data']['id'] ?? null;
+                $booking->save();
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return Message::exception($request, $e, "Gagal mengirim notifikasi WhatsApp: " . $e->getMessage());
+            }
 
             DB::commit();
 

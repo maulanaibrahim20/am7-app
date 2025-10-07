@@ -8,7 +8,31 @@
         </div>
     </div>
     <div class="card-body">
-
+        @if ($booking->whatsapp_id)
+            <div class="card border-info mb-4">
+                <div class="card-body">
+                    <h6 class="text-info mb-3">
+                        <i class="fab fa-whatsapp me-2"></i>WhatsApp Notification Status
+                    </h6>
+                    @php
+                        $waStatus = app(\App\Services\SidobeWhatsappService::class)->checkMessageStatus(
+                            $booking->whatsapp_id,
+                        );
+                    @endphp
+                    @if (!empty($waStatus['error']))
+                        <div class="alert alert-warning mb-0">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Gagal cek status WhatsApp: {{ $waStatus['message'] }}
+                        </div>
+                    @else
+                        <div class="alert alert-success mb-0">
+                            <i class="fas fa-check-circle me-2"></i>
+                            Pesan WhatsApp sudah dikirim! Status: {{ $waStatus['data']['status'] ?? 'unknown' }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+        @endif
         <!-- Status Timeline -->
         <div class="card border-0 bg-light mb-4">
             <div class="card-body">

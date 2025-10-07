@@ -24,6 +24,10 @@
 </head>
 
 <body>
+    {{-- <div id="fullscreen-loader">
+        <img src="{{ url('/img/loading.svg') }}" alt="Loading...">
+        <span>Processing...</span>
+    </div> --}}
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">

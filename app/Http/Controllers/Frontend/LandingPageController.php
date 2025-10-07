@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\{DB, Validator};
 use App\Facades\Message;
 use App\Http\Controllers\Controller;
 use App\Models\{Booking, Service};
+use App\Services\WhatsappTemplateService;
 
 class LandingPageController extends Controller
 {
@@ -23,7 +24,7 @@ class LandingPageController extends Controller
         return view('app.frontend.pages.home.booking', $data);
     }
 
-    public function bookingStore(Request $request)
+    public function bookingStore(Request $request, WhatsappTemplateService $templateService)
     {
         DB::beginTransaction();
 
@@ -60,6 +61,17 @@ class LandingPageController extends Controller
 
             $booking->services()->attach($service->id, [
                 'estimated_price' => $service->base_price,
+            ]);
+
+            $whatsapp = $templateService->sendBookingCreated($booking);
+
+            if (!empty($whatsapp['error']) && $whatsapp['error'] === true) {
+                DB::rollBack();
+                return Message::error($request, "Gagal membuat booking: " . ($whatsapp['message'] ?? 'Nomor WhatsApp tidak valid.'));
+            }
+
+            $booking->update([
+                'whatsapp_id' => $whatsapp['data']['id'],
             ]);
 
             DB::commit();

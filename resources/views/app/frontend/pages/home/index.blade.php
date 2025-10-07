@@ -242,7 +242,7 @@
                                             {{ ucfirst($service->vehicle_type) }}</p>
                                         <a href="{{ route('landing.booking.create', ['service_id' => $service->id]) }}"
                                             class="btn btn-primary py-3 px-5 mt-3" data-toggle="ajaxModal"
-                                            data-title="User | Add New" data-size="lg">
+                                            data-title="Booking " data-size="lg">
                                             Book Now <i class="fa fa-arrow-right ms-3"></i>
                                         </a>
                                     </div>
