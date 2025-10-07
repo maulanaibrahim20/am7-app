@@ -91,7 +91,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        $data['category'] = Category::all();
+        $data['category'] = Category::where('is_active', true)->where('type', 'product')->get();
+        $data['supplier'] = Supplier::where('is_active', true)->get();
 
         return view('app.backend.pages.product.create', $data);
     }
@@ -166,7 +167,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $data['product'] = Product::with('category')->findOrFail($id);
-        $data['category'] = Category::all();
+        $data['category'] = Category::where('is_active', true)->where('type', 'product')->get();
 
         return view('app.backend.pages.product.edit', $data);
     }

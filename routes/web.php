@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\{
     DashboardController,
     MechanicController,
     ProductController,
+    PurchaseOrderController,
     SaleController,
     ServiceController,
     StaffController,
@@ -158,13 +159,26 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
         Route::post('/loadPaymentFromBooking/{id}', 'loadFromBooking')->name('loadFromBooking');
         Route::get('/filter', 'filter')->name('filter');
     });
+
     Route::prefix('sale')->controller(SaleController::class)->name('sale.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/getData', 'getData')->name('getData');
         Route::get('/show/{id}', 'show')->name('show');
-        Route::post('/updateStatus/{id}', 'updateStatus')->name('updateStatus');
-        Route::put('/updateNote/{id}', 'notes')->name('updateNote');
-        Route::post('/loadPaymentFromBooking/{id}', 'loadFromBooking')->name('loadFromBooking');
+        Route::get('/filter', 'filter')->name('filter');
+    });
+
+    Route::prefix('purchase-order')->controller(PurchaseOrderController::class)->name('purchase-order.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/getData', 'getData')->name('getData');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::put('/update/{id}', 'update')->name('update');
+        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        Route::get('/receive/{id}', 'receive')->name('receive');
+        Route::post('/receive/{id}', 'receiveSubmit')->name('receiveSubmit');
+        Route::put('/updateStatus/{id}', 'updateStatus')->name('updateStatus');
         Route::get('/filter', 'filter')->name('filter');
     });
 

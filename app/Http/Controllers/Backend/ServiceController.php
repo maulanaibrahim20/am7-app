@@ -96,7 +96,7 @@ class ServiceController extends Controller
 
     public function create()
     {
-        $data['category'] = Category::where('is_active', true)->get();
+        $data['category'] = Category::where('type', 'service')->where('is_active', true)->get();
 
         return view('app.backend.pages.services.create', $data);
     }
@@ -151,7 +151,7 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $data['service'] = Service::with('category')->findOrFail($id);
-        $data['category'] = Category::all();
+        $data['category'] = Category::where('type', 'service')->where('is_active', true)->get();
 
         return view('app.backend.pages.services.edit', $data);
     }

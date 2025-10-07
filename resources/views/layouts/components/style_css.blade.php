@@ -10,7 +10,8 @@
 
  <!-- Icons -->
  <link rel="stylesheet" href="{{ url('/template') }}/vendor/fonts/fontawesome.css" />
- <link rel="stylesheet" href="{{ url('/template') }}/vendor/fonts/tabler-icons.css" />
+ {{-- <link rel="stylesheet" href="{{ url('/template') }}/vendor/fonts/tabler-icons.css" /> --}}
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
  <link rel="stylesheet" href="{{ url('/template') }}/vendor/fonts/flag-icons.css" />
 
  <!-- Core CSS -->

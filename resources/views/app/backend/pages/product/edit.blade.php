@@ -96,6 +96,7 @@
     </div>
 
     <div class="form-footer text-end mt-3">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="reset" class="btn btn-warning me-2">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>

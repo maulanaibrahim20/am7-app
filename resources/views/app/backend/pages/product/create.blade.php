@@ -12,10 +12,19 @@
                 </select>
             </div>
             <div class="col-md-6">
+                <label class="form-label">Supplier</label>
+                <select class="form-select" name="supplier_id" required>
+                    <option value="">Select Supplier</option>
+                    @foreach ($supplier as $sup)
+                        <option value="{{ $sup->id }}">{{ $sup->contact_person }} {{ $sup->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
                 <label class="form-label">SKU <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="sku" required>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <label class="form-label">Product Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="name" required>
             </div>
@@ -70,6 +79,7 @@
         </div>
     </div>
     <div class="form-footer text-end mt-3">
+        <button type="reset" class="btn btn-warning me-2">Cancel</button>
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>

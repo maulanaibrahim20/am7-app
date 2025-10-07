@@ -100,6 +100,18 @@
                     <div>Sale</div>
                 </a>
             </li>
+            <li class="menu-item {{ Request::segment(2) == 'purchase-order' ? 'active' : '' }}">
+                <a href="{{ route('purchase-order.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-truck-return"></i>
+                    <div>Purchase Order</div>
+                </a>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'sale' ? 'active' : '' }}">
+                <a href="{{ route('sale.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-arrow-forward-up-double"></i>
+                    <div>Stock Movements</div>
+                </a>
+            </li>
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Master</span>
             </li>

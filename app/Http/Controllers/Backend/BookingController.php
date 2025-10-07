@@ -164,7 +164,6 @@ class BookingController extends Controller
         try {
             $booking = Booking::with('services')->findOrFail($bookingId);
 
-            // Validasi status booking
             if (!in_array($booking->status, ['approved', 'in_progress'])) {
                 return redirect()->back()->with('error', 'Booking belum di-approve atau sudah diproses.');
             }
@@ -203,7 +202,7 @@ class BookingController extends Controller
                 ]);
 
             // Generate session code
-            $sessionCode = 'CART-' . date('YmdHis') . '-' . Auth::id();
+            $sessionCode = CartSession::generateSessionCode();
 
             // Buat cart session baru
             $cart = CartSession::create([

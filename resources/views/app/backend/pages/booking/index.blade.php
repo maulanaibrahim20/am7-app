@@ -5,7 +5,8 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div class="col-12 text-end">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Booking Data</h5>
                         <a href="{{ route('booking.filter') }}" data-toggle="ajaxOffcanvas" data-title="Filter | Bookings"
                             data-size="end" class="fas fa-filter text-secondary fs-4">
                         </a>

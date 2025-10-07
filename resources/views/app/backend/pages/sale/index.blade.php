@@ -5,16 +5,19 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <div class="col-12 text-end mb-3">
-                        <a href="{{ url('sales.filter') }}" data-toggle="ajaxOffcanvas" data-title="Filter | Sales"
-                            data-size="end" class="fas fa-filter text-secondary fs-4"></a>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Sales Data</h5>
+                        <a href="{{ route('sale.filter') }}" data-toggle="ajaxOffcanvas" data-title="Filter | Sales"
+                            data-size="end" class="text-secondary fs-4">
+                            <i class="fas fa-filter"></i>
+                        </a>
                     </div>
                     <table id="dataTbl" class="table table-responsive " data-ajax="{{ route('sale.getData') }}"
                         data-processing="true" data-server-side="true" data-length-menu="[10, 25, 50, 100]"
                         data-ordering="true">
                         <thead>
                             <tr>
-                                <th data-data="DT_RowIndex" data-orderable="false">No</th>
+                                <th data-data="DT_RowIndex" data-orderable="false" data-searchable="false">No</th>
                                 <th data-data="invoice_number">Invoice</th>
                                 <th data-data="customer_name">Customer</th>
                                 <th data-data="cashier_name">Cashier</th>
