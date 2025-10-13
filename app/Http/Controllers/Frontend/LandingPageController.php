@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{DB, Validator};
 use App\Facades\Message;
 use App\Http\Controllers\Controller;
-use App\Models\{Booking, Service};
+use App\Models\{AboutSection, Booking, Carousel, Feature, Service, User};
 use App\Services\WhatsappTemplateService;
 
 class LandingPageController extends Controller
@@ -14,6 +14,12 @@ class LandingPageController extends Controller
     public function home()
     {
         $data['services'] = Service::where('is_active', true)->get();
+        $data['mechanic'] = User::where('is_active', true)->whereHas('roles', function ($q) {
+            $q->where('name', 'mechanic');
+        })->get();
+        $data['carousels'] = Carousel::where('is_active', true)->orderBy('order')->get();
+        $data['about'] = AboutSection::with('features')->first();
+        $data['features'] = Feature::where('is_active', true)->orderBy('order')->get();
 
         return view('app.frontend.pages.home.index', $data);
     }
