@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\{
     InventoryController,
     MechanicController,
     ProductController,
+    ProfileController,
     PurchaseOrderController,
     SaleController,
     ServiceController,
@@ -196,8 +197,14 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
             Route::get('/', 'index')->name('index');
             Route::get('/getData', 'getData')->name('getData');
         });
-    });
 
+        Route::prefix('profile')->controller(ProfileController::class)->name('profile.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::put('/update', 'updateProfile')->name('updateProfile');
+            Route::post('/delete-account', 'deleteAccount')->name('deleteAccount');
+            Route::post('/change-password', 'changePassword')->name('changePassword');
+        });
+    });
 
     Route::prefix('master')->name('master.')->group(function () {
 

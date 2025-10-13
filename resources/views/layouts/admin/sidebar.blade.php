@@ -136,6 +136,11 @@
                     <div>Settings</div>
                 </a>
                 <ul class="menu-sub">
+                    <li class="menu-item {{ Request::segment(3) == 'profile' ? 'active' : '' }}">
+                        <a href="{{ route('setting.profile.index') }}" class="menu-link">
+                            <div>Profile</div>
+                        </a>
+                    </li>
                     <li class="menu-item {{ Request::segment(3) == 'endpoint-cront-task' ? 'active' : '' }}">
                         <a href="{{ route('setting.endpoint-cront-task.index') }}" class="menu-link">
                             <div>Endpoint Cron Taks</div>
