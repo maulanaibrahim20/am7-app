@@ -505,10 +505,6 @@ class CashierController extends Controller
                     $stockBefore = $product->stock_quantity;
                     $stockAfter = $stockBefore - $item->quantity;
 
-                    $product->update([
-                        'stock_quantity' => $stockAfter,
-                    ]);
-
                     StockMovement::create([
                         'product_id' => $product->id,
                         'type' => 'out',

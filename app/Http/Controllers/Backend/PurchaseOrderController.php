@@ -243,6 +243,10 @@ class PurchaseOrderController extends Controller
                     $qty = (int) $data['quantity_received'];
                     $item->quantity_received += $qty;
                     $item->save();
+
+                    if ($item->product) {
+                        $item->product->updateStock($qty, 'in');
+                    }
                 }
             }
 

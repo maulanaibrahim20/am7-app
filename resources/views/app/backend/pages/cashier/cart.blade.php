@@ -117,7 +117,7 @@
                     <i class="ti ti-clock me-1"></i> Hold Transaction
                 </a>
                 <a href="{{ route('cashier.checkout') }}" class="btn btn-success btn-lg">
-                    <i class="ti ti-cash"></i> Proceed to Checkout
+                    <i class="ti ti-cash me-1"></i> Proceed to Checkout
                 </a>
             </div>
         </div>

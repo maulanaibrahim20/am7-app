@@ -106,10 +106,10 @@
                     <div>Purchase Order</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::segment(2) == 'sale' ? 'active' : '' }}">
-                <a href="{{ route('sale.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-arrow-forward-up-double"></i>
-                    <div>Stock Movements</div>
+            <li class="menu-item {{ Request::segment(2) == 'inventory' ? 'active' : '' }}">
+                <a href="{{ route('inventory.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-building-warehouse"></i>
+                    <div>Inventory</div>
                 </a>
             </li>
             <li class="menu-header small text-uppercase">
@@ -126,6 +126,20 @@
                     <i class="menu-icon tf-icons ti ti-truck-delivery"></i>
                     <div>Supplier</div>
                 </a>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'user' ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-settings"></i>
+                    <div>Settings</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::segment(3) == 'admin' ? 'active' : '' }}">
+                        <a href="{{ route('user.admin.index') }}" class="menu-link">
+                            <div>Endpoint Cron Taks</div>
+                        </a>
+                    </li>
+
+                </ul>
             </li>
         @endrole
         @role('cashier')

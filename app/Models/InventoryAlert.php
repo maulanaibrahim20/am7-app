@@ -17,12 +17,14 @@ class InventoryAlert extends Model
         'message',
         'is_resolved',
         'resolved_at',
-        'resolved_by'
+        'resolved_by',
     ];
 
     protected $casts = [
         'is_resolved' => 'boolean',
-        'resolved_at' => 'datetime'
+        'resolved_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function product(): BelongsTo
@@ -57,5 +59,48 @@ class InventoryAlert extends Model
     public function scopeByType($query, $type)
     {
         return $query->where('alert_type', $type);
+    }
+
+    public function scopeForProduct($query, int $productId)
+    {
+        return $query->where('product_id', $productId);
+    }
+    public function markAsResolved(?int $userId = null): bool
+    {
+        return $this->update([
+            'is_resolved' => true,
+            'resolved_at' => now(),
+            'resolved_by' => $userId ?? Auth::id(),
+        ]);
+    }
+
+    public function getTypeBadgeColorAttribute(): string
+    {
+        return match ($this->alert_type) {
+            'low_stock' => 'danger',
+            'reorder_point' => 'warning',
+            'max_stock' => 'info',
+            'expiry' => 'secondary',
+            default => 'secondary'
+        };
+    }
+
+    public function getTypeLabelAttribute(): string
+    {
+        return match ($this->alert_type) {
+            'low_stock' => 'Low Stock',
+            'reorder_point' => 'Reorder Point',
+            'max_stock' => 'Overstock',
+            'expiry' => 'Expiry',
+            default => 'Unknown'
+        };
+    }
+
+    public function getStatusBadgeAttribute(): string
+    {
+        if ($this->is_resolved) {
+            return '<span class="badge bg-success">Resolved</span>';
+        }
+        return '<span class="badge bg-' . $this->type_badge_color . '">Unresolved</span>';
     }
 }

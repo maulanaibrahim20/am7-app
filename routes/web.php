@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\{
     CategoryController,
     CustomerController,
     DashboardController,
+    InventoryController,
     MechanicController,
     ProductController,
     PurchaseOrderController,
@@ -182,6 +183,14 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
         Route::get('/filter', 'filter')->name('filter');
     });
 
+    Route::prefix('inventory')->controller(InventoryController::class)->name('inventory.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/getData', 'getData')->name('getData');
+        Route::get('/show/{id}', 'show')->name('show');
+        Route::post('/resolve/{id}', 'resolve')->name('resolve');
+    });
+
+
     Route::prefix('master')->name('master.')->group(function () {
 
         Route::prefix('category')->controller(CategoryController::class)->name('category.')->group(function () {
@@ -207,3 +216,6 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
 
     Route::get('/logout', LogoutController::class)->name('logout');
 });
+
+
+require_once('cront_taks.php');
