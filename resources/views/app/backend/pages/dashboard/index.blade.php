@@ -4,783 +4,467 @@
 @endpush
 @section('content')
     <div class="row">
-        <!-- Website Analytics -->
-        <div class="col-lg-6 mb-4">
-            <div class="swiper-container swiper-container-horizontal swiper swiper-card-advance-bg"
-                id="swiper-with-pagination-cards">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="text-white mb-0 mt-2">Website Analytics</h5>
-                                <small>Total 28.5% Conversion Rate</small>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1">
-                                    <h6 class="text-white mt-0 mt-md-3 mb-3">Traffic</h6>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="d-flex mb-4 align-items-center">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">28%</p>
-                                                    <p class="mb-0">Sessions</p>
-                                                </li>
-                                                <li class="d-flex align-items-center mb-2">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">1.2k</p>
-                                                    <p class="mb-0">Leads</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-6">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="d-flex mb-4 align-items-center">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">3.1k</p>
-                                                    <p class="mb-0">Page Views</p>
-                                                </li>
-                                                <li class="d-flex align-items-center mb-2">
-                                                    <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">12%</p>
-                                                    <p class="mb-0">Conversions</p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                    <img src="{{ url('/template') }}/img/illustrations/card-website-analytics-1.png"
-                                        alt="Website Analytics" width="170" class="card-website-analytics-img" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="text-white mb-0 mt-2">Website Analytics</h5>
-                                <small>Total 28.5% Conversion Rate</small>
-                            </div>
-                            <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1">
-                                <h6 class="text-white mt-0 mt-md-3 mb-3">Spending</h6>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">12h</p>
-                                                <p class="mb-0">Spend</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">127</p>
-                                                <p class="mb-0">Order</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">18</p>
-                                                <p class="mb-0">Order Size</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">2.3k</p>
-                                                <p class="mb-0">Items</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="{{ url('/template') }}/img/illustrations/card-website-analytics-2.png"
-                                    alt="Website Analytics" width="170" class="card-website-analytics-img" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="row">
-                            <div class="col-12">
-                                <h5 class="text-white mb-0 mt-2">Website Analytics</h5>
-                                <small>Total 28.5% Conversion Rate</small>
-                            </div>
-                            <div class="col-lg-7 col-md-9 col-12 order-2 order-md-1">
-                                <h6 class="text-white mt-0 mt-md-3 mb-3">Revenue Sources</h6>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">268</p>
-                                                <p class="mb-0">Direct</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">62</p>
-                                                <p class="mb-0">Referral</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-6">
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="d-flex mb-4 align-items-center">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">890</p>
-                                                <p class="mb-0">Organic</p>
-                                            </li>
-                                            <li class="d-flex align-items-center mb-2">
-                                                <p class="mb-0 fw-semibold me-2 website-analytics-text-bg">1.2k</p>
-                                                <p class="mb-0">Campaign</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-md-3 col-12 order-1 order-md-2 my-4 my-md-0 text-center">
-                                <img src="{{ url('/template') }}/img/illustrations/card-website-analytics-3.png"
-                                    alt="Website Analytics" width="170" class="card-website-analytics-img" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-        <!--/ Website Analytics -->
-
-        <!-- Sales Overview -->
+        <!-- Revenue Overview Cards -->
         <div class="col-lg-3 col-sm-6 mb-4">
             <div class="card">
-                <div class="card-header">
+                <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <small class="d-block mb-1 text-muted">Sales Overview</small>
-                        <p class="card-text text-success">+18.2%</p>
+                        <div class="card-info">
+                            <p class="card-text text-muted mb-1">Total Revenue Today</p>
+                            <div class="d-flex align-items-end mb-2">
+                                <h4 class="card-title mb-0 me-2">Rp {{ number_format($todayRevenue, 0, ',', '.') }}</h4>
+                                <small
+                                    class="text-success">{{ $revenueGrowth > 0 ? '+' : '' }}{{ number_format($revenueGrowth, 1) }}%</small>
+                            </div>
+                        </div>
+                        <div class="card-icon">
+                            <span class="badge bg-label-success rounded-pill p-2">
+                                <i class="ti ti-currency-dollar ti-sm"></i>
+                            </span>
+                        </div>
                     </div>
-                    <h4 class="card-title mb-1">$42.5k</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="card-info">
+                            <p class="card-text text-muted mb-1">Total Transactions</p>
+                            <div class="d-flex align-items-end mb-2">
+                                <h4 class="card-title mb-0 me-2">{{ $totalTransactions }}</h4>
+                                <small class="text-muted">Today</small>
+                            </div>
+                        </div>
+                        <div class="card-icon">
+                            <span class="badge bg-label-primary rounded-pill p-2">
+                                <i class="ti ti-receipt ti-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="card-info">
+                            <p class="card-text text-muted mb-1">Active Booking</p>
+                            <div class="d-flex align-items-end mb-2">
+                                <h4 class="card-title mb-0 me-2">{{ $activeBookings }}</h4>
+                                <small class="text-warning">Waiting & Progress</small>
+                            </div>
+                        </div>
+                        <div class="card-icon">
+                            <span class="badge bg-label-warning rounded-pill p-2">
+                                <i class="ti ti-calendar-event ti-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="card-info">
+                            <p class="card-text text-muted mb-1">Low Product Stock</p>
+                            <div class="d-flex align-items-end mb-2">
+                                <h4 class="card-title mb-0 me-2">{{ $lowStockCount }}</h4>
+                                <small class="text-danger">Attention Required</small>
+                            </div>
+                        </div>
+                        <div class="card-icon">
+                            <span class="badge bg-label-danger rounded-pill p-2">
+                                <i class="ti ti-alert-triangle ti-sm"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Chart -->
+        <div class="col-lg-8 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0">Income Chart</h5>
+                        <small class="text-muted">7 The Last Day</small>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="revenueChart" data-bs-toggle="dropdown">
+                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="javascript:void(0);">7 Days</a>
+                            <a class="dropdown-item" href="javascript:void(0);">30 Days</a>
+                            <a class="dropdown-item" href="javascript:void(0);">90 Days</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="d-flex gap-2 align-items-center mb-2">
-                                <span class="badge bg-label-info p-1 rounded"><i
-                                        class="ti ti-shopping-cart ti-xs"></i></span>
-                                <p class="mb-0">Order</p>
-                            </div>
-                            <h5 class="mb-0 pt-1 text-nowrap">62.2%</h5>
-                            <small class="text-muted">6,440</small>
+                    <div id="revenueChartContainer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Booking -->
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Status Booking</h5>
+                    <small class="text-muted">Status Summary</small>
+                </div>
+                <div class="card-body">
+                    <div id="bookingStatusChart"></div>
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Pending</span>
+                            <span class="fw-semibold">{{ $bookingStatus['pending'] ?? 0 }}</span>
                         </div>
-                        <div class="col-4">
-                            <div class="divider divider-vertical">
-                                <div class="divider-text">
-                                    <span class="badge-divider-bg bg-label-secondary">VS</span>
-                                </div>
-                            </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Approved</span>
+                            <span class="fw-semibold">{{ $bookingStatus['approved'] ?? 0 }}</span>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="d-flex gap-2 justify-content-end align-items-center mb-2">
-                                <p class="mb-0">Visits</p>
-                                <span class="badge bg-label-primary p-1 rounded"><i class="ti ti-link ti-xs"></i></span>
-                            </div>
-                            <h5 class="mb-0 pt-1 text-nowrap ms-lg-n3 ms-xl-0">25.5%</h5>
-                            <small class="text-muted">12,749</small>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>In Progress</span>
+                            <span class="fw-semibold">{{ $bookingStatus['in_progress'] ?? 0 }}</span>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-center mt-4">
-                        <div class="progress w-100" style="height: 8px">
-                            <div class="progress-bar bg-info" style="width: 70%" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 30%"
-                                aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="d-flex justify-content-between">
+                            <span>Completed</span>
+                            <span class="fw-semibold">{{ $bookingStatus['completed'] ?? 0 }}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/ Sales Overview -->
 
-        <!-- Revenue Generated -->
-        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-            <div class="card">
-                <div class="card-body pb-0">
-                    <div class="card-icon">
-                        <span class="badge bg-label-success rounded-pill p-2">
-                            <i class="ti ti-credit-card ti-sm"></i>
-                        </span>
-                    </div>
-                    <h5 class="card-title mb-0 mt-2">97.5k</h5>
-                    <small>Revenue Generated</small>
-                </div>
-                <div id="revenueGenerated"></div>
-            </div>
-        </div>
-        <!--/ Revenue Generated -->
-
-        <!-- Earning Reports -->
+        <!-- Top Products -->
         <div class="col-lg-6 mb-4">
             <div class="card h-100">
-                <div class="card-header pb-0 d-flex justify-content-between mb-lg-n4">
-                    <div class="card-title mb-0">
-                        <h5 class="mb-0">Earning Reports</h5>
-                        <small class="text-muted">Weekly Earnings Overview</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="earningReportsId" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="earningReportsId">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        </div>
-                    </div>
-                    <!-- </div> -->
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-4 d-flex flex-column align-self-end">
-                            <div class="d-flex gap-2 align-items-center mb-2 pb-1 flex-wrap">
-                                <h1 class="mb-0">$468</h1>
-                                <div class="badge rounded bg-label-success">+4.2%</div>
-                            </div>
-                            <small class="text-muted">You informed of this week compared to last week</small>
-                        </div>
-                        <div class="col-12 col-md-8">
-                            <div id="weeklyEarningReports"></div>
-                        </div>
-                    </div>
-                    <div class="border rounded p-3 mt-2">
-                        <div class="row gap-4 gap-sm-0">
-                            <div class="col-12 col-sm-4">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <div class="badge rounded bg-label-primary p-1">
-                                        <i class="ti ti-currency-dollar ti-sm"></i>
-                                    </div>
-                                    <h6 class="mb-0">Earnings</h6>
-                                </div>
-                                <h4 class="my-2 pt-1">$545.69</h4>
-                                <div class="progress w-75" style="height: 4px">
-                                    <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65"
-                                        aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <div class="badge rounded bg-label-info p-1"><i class="ti ti-chart-pie-2 ti-sm"></i>
-                                    </div>
-                                    <h6 class="mb-0">Profit</h6>
-                                </div>
-                                <h4 class="my-2 pt-1">$256.34</h4>
-                                <div class="progress w-75" style="height: 4px">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-4">
-                                <div class="d-flex gap-2 align-items-center">
-                                    <div class="badge rounded bg-label-danger p-1">
-                                        <i class="ti ti-brand-paypal ti-sm"></i>
-                                    </div>
-                                    <h6 class="mb-0">Expense</h6>
-                                </div>
-                                <h4 class="my-2 pt-1">$74.19</h4>
-                                <div class="progress w-75" style="height: 4px">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 65%"
-                                        aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/ Earning Reports -->
-
-        <!-- Support Tracker -->
-        <div class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between pb-0">
-                    <div class="card-title mb-0">
-                        <h5 class="mb-0">Support Tracker</h5>
-                        <small class="text-muted">Last 7 Days</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="supportTrackerMenu" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="supportTrackerMenu">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-sm-4 col-md-12 col-lg-4">
-                            <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
-                                <h1 class="mb-0">164</h1>
-                                <p class="mb-0">Total Tickets</p>
-                            </div>
-                            <ul class="p-0 m-0">
-                                <li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-                                    <div class="badge rounded bg-label-primary p-1"><i class="ti ti-ticket ti-sm"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0 text-nowrap">New Tickets</h6>
-                                        <small class="text-muted">142</small>
-                                    </div>
-                                </li>
-                                <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
-                                    <div class="badge rounded bg-label-info p-1">
-                                        <i class="ti ti-circle-check ti-sm"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0 text-nowrap">Open Tickets</h6>
-                                        <small class="text-muted">28</small>
-                                    </div>
-                                </li>
-                                <li class="d-flex gap-3 align-items-center pb-1">
-                                    <div class="badge rounded bg-label-warning p-1"><i class="ti ti-clock ti-sm"></i>
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-0 text-nowrap">Response Time</h6>
-                                        <small class="text-muted">1 Day</small>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-12 col-sm-8 col-md-12 col-lg-8">
-                            <div id="supportTracker"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/ Support Tracker -->
-
-        <!-- Sales By Country -->
-        <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card h-100">
                 <div class="card-header d-flex justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">Sales by Countries</h5>
-                        <small class="text-muted">Monthly Sales Overview</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="salesByCountry" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountry">
-                            <a class="dropdown-item" href="javascript:void(0);">Download</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <ul class="p-0 m-0">
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/template') }}/svg/flags/us.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$8,567k</h6>
-                                    </div>
-                                    <small class="text-muted">United states</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold mb-0">
-                                        <i class="ti ti-chevron-up"></i>
-                                        25.8%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/template') }}/svg/flags/br.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$2,415k</h6>
-                                    </div>
-                                    <small class="text-muted">Brazil</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-danger fw-semibold mb-0">
-                                        <i class="ti ti-chevron-down"></i>
-                                        6.2%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/template') }}/svg/flags/in.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$865k</h6>
-                                    </div>
-                                    <small class="text-muted">India</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold">
-                                        <i class="ti ti-chevron-up"></i>
-                                        12.4%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/template') }}/svg/flags/au.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$745k</h6>
-                                    </div>
-                                    <small class="text-muted">Australia</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-danger fw-semibold mb-0">
-                                        <i class="ti ti-chevron-down"></i>
-                                        11.9%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center mb-4">
-                            <img src="{{ url('/template') }}/svg/flags/fr.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$45</h6>
-                                    </div>
-                                    <small class="text-muted">France</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold mb-0">
-                                        <i class="ti ti-chevron-up"></i>
-                                        16.2%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex align-items-center">
-                            <img src="{{ url('/template') }}/svg/flags/cn.svg" alt="User" class="rounded-circle me-3"
-                                width="34" />
-                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                <div class="me-2">
-                                    <div class="d-flex align-items-center">
-                                        <h6 class="mb-0 me-1">$12k</h6>
-                                    </div>
-                                    <small class="text-muted">China</small>
-                                </div>
-                                <div class="user-progress">
-                                    <p class="text-success fw-semibold mb-0">
-                                        <i class="ti ti-chevron-up"></i>
-                                        14.8%
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--/ Sales By Country -->
-
-        <!-- Total Earning -->
-        <div class="col-12 col-xl-4 mb-4 col-md-6">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between pb-1">
-                    <h5 class="mb-0 card-title">Total Earning</h5>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="totalEarning" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="totalEarning">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <h1 class="mb-0 me-2">87%</h1>
-                        <i class="ti ti-chevron-up text-success me-1"></i>
-                        <p class="text-success mb-0">25.8%</p>
-                    </div>
-                    <div id="totalEarningChart"></div>
-                    <div class="d-flex align-items-start my-4">
-                        <div class="badge rounded bg-label-primary p-2 me-3 rounded">
-                            <i class="ti ti-currency-dollar ti-sm"></i>
-                        </div>
-                        <div class="d-flex justify-content-between w-100 gap-2 align-items-center">
-                            <div class="me-2">
-                                <h6 class="mb-0">Total Sales</h6>
-                                <small class="text-muted">Refund</small>
-                            </div>
-                            <p class="mb-0 text-success">+$98</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-start">
-                        <div class="badge rounded bg-label-secondary p-2 me-3 rounded">
-                            <i class="ti ti-brand-paypal ti-sm"></i>
-                        </div>
-                        <div class="d-flex justify-content-between w-100 gap-2 align-items-center">
-                            <div class="me-2">
-                                <h6 class="mb-0">Total Revenue</h6>
-                                <small class="text-muted">Client Payment</small>
-                            </div>
-                            <p class="mb-0 text-success">+$126</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/ Total Earning -->
-
-        <!-- Monthly Campaign State -->
-        <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card h-100">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="mb-0">Monthly Campaign State</h5>
-                        <small class="text-muted">8.52k Social Visiters</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="MonthlyCampaign" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="MonthlyCampaign">
-                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Download</a>
-                            <a class="dropdown-item" href="javascript:void(0);">View All</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <ul class="p-0 m-0">
-                        <li class="mb-4 pb-1 d-flex justify-content-between align-items-center">
-                            <div class="badge bg-label-success rounded p-2"><i class="ti ti-mail ti-sm"></i></div>
-                            <div class="d-flex justify-content-between w-100 flex-wrap">
-                                <h6 class="mb-0 ms-3">Emails</h6>
-                                <div class="d-flex">
-                                    <p class="mb-0 fw-semibold">12,346</p>
-                                    <p class="ms-3 text-success mb-0">0.3%</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4 pb-1 d-flex justify-content-between align-items-center">
-                            <div class="badge bg-label-info rounded p-2"><i class="ti ti-link ti-sm"></i></div>
-                            <div class="d-flex justify-content-between w-100 flex-wrap">
-                                <h6 class="mb-0 ms-3">Opened</h6>
-                                <div class="d-flex">
-                                    <p class="mb-0 fw-semibold">8,734</p>
-                                    <p class="ms-3 text-success mb-0">2.1%</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4 pb-1 d-flex justify-content-between align-items-center">
-                            <div class="badge bg-label-warning rounded p-2"><i class="ti ti-click ti-sm"></i></div>
-                            <div class="d-flex justify-content-between w-100 flex-wrap">
-                                <h6 class="mb-0 ms-3">Clicked</h6>
-                                <div class="d-flex">
-                                    <p class="mb-0 fw-semibold">967</p>
-                                    <p class="ms-3 text-success mb-0">1.4%</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4 pb-1 d-flex justify-content-between align-items-center">
-                            <div class="badge bg-label-primary rounded p-2"><i class="ti ti-users ti-sm"></i></div>
-                            <div class="d-flex justify-content-between w-100 flex-wrap">
-                                <h6 class="mb-0 ms-3">Subscribe</h6>
-                                <div class="d-flex">
-                                    <p class="mb-0 fw-semibold">345</p>
-                                    <p class="ms-3 text-success mb-0">8.5k</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-4 pb-1 d-flex justify-content-between align-items-center">
-                            <div class="badge bg-label-secondary rounded p-2">
-                                <i class="ti ti-alert-triangle ti-sm text-body"></i>
-                            </div>
-                            <div class="d-flex justify-content-between w-100 flex-wrap">
-                                <h6 class="mb-0 ms-3">Complaints</h6>
-                                <div class="d-flex">
-                                    <p class="mb-0 fw-semibold">10</p>
-                                    <p class="ms-3 text-success mb-0">1.5%</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <div class="badge bg-label-danger rounded p-2"><i class="ti ti-ban ti-sm"></i></div>
-                            <div class="d-flex justify-content-between w-100 flex-wrap">
-                                <h6 class="mb-0 ms-3">Unsubscribe</h6>
-                                <div class="d-flex">
-                                    <p class="mb-0 fw-semibold">86</p>
-                                    <p class="ms-3 text-success mb-0">0.8%</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--/ Monthly Campaign State -->
-
-        <!-- Source Visit -->
-        <div class="col-xl-4 col-md-6 order-2 order-lg-1">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="mb-0">Source Visits</h5>
-                        <small class="text-muted">38.4k Visitors</small>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="sourceVisits" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sourceVisits">
-                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Download</a>
-                            <a class="dropdown-item" href="javascript:void(0);">View All</a>
-                        </div>
+                    <div>
+                        <h5 class="card-title mb-0">Best-Selling Products</h5>
+                        <small class="text-muted">This Month</small>
                     </div>
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled mb-0">
-                        <li class="mb-3 pb-1">
-                            <div class="d-flex align-items-start">
-                                <div class="badge bg-label-secondary p-2 me-3 rounded">
-                                    <i class="ti ti-shadow ti-sm"></i>
+                        @foreach ($topProducts as $product)
+                            <li class="d-flex align-items-center mb-3 pb-1">
+                                <div class="badge bg-label-primary rounded p-2 me-3">
+                                    <i class="ti ti-package ti-sm"></i>
                                 </div>
-                                <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
+                                <div class="d-flex justify-content-between w-100 flex-wrap">
                                     <div class="me-2">
-                                        <h6 class="mb-0">Direct Source</h6>
-                                        <small class="text-muted">Direct link click</small>
+                                        <h6 class="mb-0">{{ $product->name }}</h6>
+                                        <small class="text-muted">{{ $product->sku }}</small>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <p class="mb-0">1.2k</p>
-                                        <div class="ms-3 badge bg-label-success">+4.2%</div>
+                                        <p class="mb-0 fw-semibold">{{ $product->total_sold }} terjual</p>
+                                        <p class="ms-3 mb-0 text-success">Rp
+                                            {{ number_format($product->total_revenue, 0, ',', '.') }}</p>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="mb-3 pb-1">
-                            <div class="d-flex align-items-start">
-                                <div class="badge bg-label-secondary p-2 me-3 rounded">
-                                    <i class="ti ti-globe ti-sm"></i>
-                                </div>
-                                <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                    <div class="me-2">
-                                        <h6 class="mb-0">Social Network</h6>
-                                        <small class="text-muted">Social Channels</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="mb-0">31.5k</p>
-                                        <div class="ms-3 badge bg-label-success">+8.2%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-3 pb-1">
-                            <div class="d-flex align-items-start">
-                                <div class="badge bg-label-secondary p-2 me-3 rounded">
-                                    <i class="ti ti-mail ti-sm"></i>
-                                </div>
-                                <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                    <div class="me-2">
-                                        <h6 class="mb-0">Email Newsletter</h6>
-                                        <small class="text-muted">Mail Campaigns</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="mb-0">893</p>
-                                        <div class="ms-3 badge bg-label-success">+2.4%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-3 pb-1">
-                            <div class="d-flex align-items-start">
-                                <div class="badge bg-label-secondary p-2 me-3 rounded">
-                                    <i class="ti ti-external-link ti-sm"></i>
-                                </div>
-                                <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                    <div class="me-2">
-                                        <h6 class="mb-0">Referrals</h6>
-                                        <small class="text-muted">Impact Radius Visits</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="mb-0">342</p>
-                                        <div class="ms-3 badge bg-label-danger">-0.4%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-3 pb-1">
-                            <div class="d-flex align-items-start">
-                                <div class="badge bg-label-secondary p-2 me-3 rounded">
-                                    <i class="ti ti-discount-2 ti-sm"></i>
-                                </div>
-                                <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                    <div class="me-2">
-                                        <h6 class="mb-0">ADVT</h6>
-                                        <small class="text-muted">Google ADVT</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="mb-0">2.15k</p>
-                                        <div class="ms-3 badge bg-label-success">+9.1%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="mb-2">
-                            <div class="d-flex align-items-start">
-                                <div class="badge bg-label-secondary p-2 me-3 rounded">
-                                    <i class="ti ti-star ti-sm"></i>
-                                </div>
-                                <div class="d-flex justify-content-between w-100 flex-wrap gap-2">
-                                    <div class="me-2">
-                                        <h6 class="mb-0">Other</h6>
-                                        <small class="text-muted">Many Sources</small>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <p class="mb-0">12.5k</p>
-                                        <div class="ms-3 badge bg-label-success">+6.2%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
-        <!--/ Source Visit -->
 
-        <!-- Projects table -->
-        <div class="col-12 col-xl-8 col-sm-12 order-1 order-lg-2 mb-4 mb-lg-0">
-            <div class="card">
-                <div class="card-datatable table-responsive">
-                    <table class="datatables-projects table border-top">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Leader</th>
-                                <th>Team</th>
-                                <th class="w-px-200">Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                    </table>
+        <!-- Top Services -->
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0">Best-Selling Services</h5>
+                        <small class="text-muted">This Month</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        @foreach ($topServices as $service)
+                            <li class="d-flex align-items-center mb-3 pb-1">
+                                <div class="badge bg-label-info rounded p-2 me-3">
+                                    <i class="ti ti-tool ti-sm"></i>
+                                </div>
+                                <div class="d-flex justify-content-between w-100 flex-wrap">
+                                    <div class="me-2">
+                                        <h6 class="mb-0">{{ $service->name }}</h6>
+                                        <small class="text-muted">{{ $service->code }}</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <p class="mb-0 fw-semibold">{{ $service->total_sold }} kali</p>
+                                        <p class="ms-3 mb-0 text-success">Rp
+                                            {{ number_format($service->total_revenue, 0, ',', '.') }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
-        <!--/ Projects table -->
+
+        <!-- Low Stock Alert -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0">Low Stock Alert</h5>
+                        <small class="text-muted">Products that need to be restocked</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Produk</th>
+                                    <th>SKU</th>
+                                    <th>Stok</th>
+                                    <th>Min Stok</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($lowStockProducts as $product)
+                                    <tr>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->sku }}</td>
+                                        <td>{{ $product->stock_quantity }}</td>
+                                        <td>{{ $product->min_stock }}</td>
+                                        <td>
+                                            @if ($product->stock_quantity <= 0)
+                                                <span class="badge bg-danger">Habis</span>
+                                            @elseif($product->stock_quantity <= $product->reorder_point)
+                                                <span class="badge bg-warning">Reorder</span>
+                                            @else
+                                                <span class="badge bg-info">Rendah</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr></tr>
+                                    <td colspan="5" class="text-center">Tidak ada data</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Bookings -->
+        <div class="col-lg-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0">Latest Bookings</h5>
+                        <small class="text-muted">Book today</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Customer</th>
+                                    <th>Time</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($recentBookings as $booking)
+                                    <tr>
+                                        <td>{{ $booking->booking_code }}</td>
+                                        <td>
+                                            <div>{{ $booking->customer_name }}</div>
+                                            <small class="text-muted">{{ $booking->customer_phone }}</small>
+                                        </td>
+                                        <td>{{ $booking->booking_time }}</td>
+                                        <td>
+                                            @switch($booking->status)
+                                                @case('pending')
+                                                    <span class="badge bg-warning">Pending</span>
+                                                @break
+
+                                                @case('approved')
+                                                    <span class="badge bg-info">Approved</span>
+                                                @break
+
+                                                @case('in_progress')
+                                                    <span class="badge bg-primary">In Progress</span>
+                                                @break
+
+                                                @case('completed')
+                                                    <span class="badge bg-success">Completed</span>
+                                                @break
+
+                                                @default
+                                                    <span class="badge bg-secondary">{{ ucfirst($booking->status) }}</span>
+                                            @endswitch
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Customers -->
+        <div class="col-lg-12 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <h5 class="card-title mb-0">Top Customers</h5>
+                        <small class="text-muted">Based on total purchases</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nama</th>
+                                    <th>Telepon</th>
+                                    <th>Total Visits</th>
+                                    <th>Total Purchases</th>
+                                    <th>Vehicle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($topCustomers as $index => $customer)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $customer->name }}</td>
+                                        <td>{{ $customer->phone }}</td>
+                                        <td>{{ $customer->visit_count }} kali</td>
+                                        <td class="fw-semibold">Rp
+                                            {{ number_format($customer->total_spent, 0, ',', '.') }}</td>
+                                        <td>
+                                            @if ($customer->vehicle_number)
+                                                {{ $customer->vehicle_number }} ({{ $customer->vehicle_type }})
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
+
 @push('js')
-    <script src="{{ url('/template') }}/js/dashboards-analytics.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Revenue Chart
+            Highcharts.chart('revenueChartContainer', {
+                chart: {
+                    type: 'area'
+                },
+                title: {
+                    text: null
+                },
+                xAxis: {
+                    categories: @json($revenueChartData['dates'])
+                },
+                yAxis: {
+                    title: {
+                        text: 'Income (Rp)'
+                    }
+                },
+                series: [{
+                    name: 'Income (Rp)',
+                    data: @json($revenueChartData['amounts']),
+                    color: '#7367f0'
+                }],
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 0,
+                                x2: 0,
+                                y2: 1
+                            },
+                            stops: [
+                                [0, 'rgba(115, 103, 240, 0.3)'],
+                                [1, 'rgba(115, 103, 240, 0.05)']
+                            ]
+                        }
+                    }
+                }
+            });
+
+            // Booking Status Chart
+            Highcharts.chart('bookingStatusChart', {
+                chart: {
+                    type: 'pie',
+                    height: 250
+                },
+                title: {
+                    text: null
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: '60%',
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.name}: {point.y}'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Booking',
+                    data: [{
+                            name: 'Pending',
+                            y: {{ $bookingStatus['pending'] ?? 0 }},
+                            color: '#ffab00'
+                        },
+                        {
+                            name: 'Approved',
+                            y: {{ $bookingStatus['approved'] ?? 0 }},
+                            color: '#00cfe8'
+                        },
+                        {
+                            name: 'In Progress',
+                            y: {{ $bookingStatus['in_progress'] ?? 0 }},
+                            color: '#7367f0'
+                        },
+                        {
+                            name: 'Completed',
+                            y: {{ $bookingStatus['completed'] ?? 0 }},
+                            color: '#28c76f'
+                        }
+                    ]
+                }],
+                credits: {
+                    enabled: false
+                }
+            });
+        });
+    </script>
 @endpush
