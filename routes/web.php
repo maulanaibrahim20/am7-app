@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\{
     PurchaseOrderController,
     SaleController,
     ServiceController,
+    SettingController,
     StaffController,
     SupplierController,
     TransactionController,
@@ -188,6 +189,13 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
         Route::get('/getData', 'getData')->name('getData');
         Route::get('/show/{id}', 'show')->name('show');
         Route::post('/resolve/{id}', 'resolve')->name('resolve');
+    });
+
+    Route::prefix('setting')->name('setting.')->group(function () {
+        Route::prefix('endpoint-cront-task')->controller(SettingController::class)->name('endpoint-cront-task.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getData', 'getData')->name('getData');
+        });
     });
 
 

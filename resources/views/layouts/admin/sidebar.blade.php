@@ -127,18 +127,25 @@
                     <div>Supplier</div>
                 </a>
             </li>
-            <li class="menu-item {{ Request::segment(2) == 'user' ? 'active open' : '' }}">
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Settings</span>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'setting' ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-settings"></i>
                     <div>Settings</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item {{ Request::segment(3) == 'admin' ? 'active' : '' }}">
-                        <a href="{{ route('user.admin.index') }}" class="menu-link">
+                    <li class="menu-item {{ Request::segment(3) == 'endpoint-cront-task' ? 'active' : '' }}">
+                        <a href="{{ route('setting.endpoint-cront-task.index') }}" class="menu-link">
                             <div>Endpoint Cron Taks</div>
                         </a>
                     </li>
-
+                    <li class="menu-item {{ Request::segment(3) == 'endpoint-cront-task' ? 'active' : '' }}">
+                        <a href="{{ url('log-viewer') }}" target="_blank" class="menu-link">
+                            <div>Laravel Log</div>
+                        </a>
+                    </li>
                 </ul>
             </li>
         @endrole
