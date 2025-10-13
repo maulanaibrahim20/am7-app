@@ -146,7 +146,7 @@
                             <div>Endpoint Cron Taks</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Request::segment(3) == 'endpoint-cront-task' ? 'active' : '' }}">
+                    <li class="menu-item ">
                         <a href="{{ url('log-viewer') }}" target="_blank" class="menu-link">
                             <div>Laravel Log</div>
                         </a>
@@ -163,6 +163,19 @@
             </li>
         @endrole
         @role('staff')
+            <li class="menu-item {{ Request::segment(2) == 'setting' ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-settings"></i>
+                    <div>Settings</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::segment(3) == 'profile' ? 'active' : '' }}">
+                        <a href="{{ route('setting.profile.index') }}" class="menu-link">
+                            <div>Profile</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         @endrole
     </ul>
     <div class="menu-footer border-top py-3 px-3">
