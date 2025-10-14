@@ -126,8 +126,8 @@
                             <div>Carousel</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Request::segment(3) == 'endpoint-cront-task' ? 'active' : '' }}">
-                        <a href="{{ route('setting.endpoint-cront-task.index') }}" class="menu-link">
+                    <li class="menu-item {{ Request::segment(3) == 'site-setting' ? 'active' : '' }}">
+                        <a href="{{ route('cms.siteSetting.index') }}" class="menu-link">
                             <div>Site Settings</div>
                         </a>
                     </li>
