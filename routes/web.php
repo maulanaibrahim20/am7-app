@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\{
     AdminController,
     BookingController,
     CategoryController,
+    CmsCarouselController,
+    ContentManagementSystemController,
     CustomerController,
     DashboardController,
     InventoryController,
@@ -190,6 +192,19 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
         Route::get('/getData', 'getData')->name('getData');
         Route::get('/show/{id}', 'show')->name('show');
         Route::post('/resolve/{id}', 'resolve')->name('resolve');
+    });
+
+    Route::prefix('content-management-system')->name('cms.')->group(function () {
+        Route::prefix('carousel')->name('carousel.')->controller(CmsCarouselController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::get('/preview', 'preview')->name('preview');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{id}', 'destroy')->name('destroy');
+        });
     });
 
     Route::prefix('setting')->name('setting.')->group(function () {

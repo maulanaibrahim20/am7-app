@@ -6,7 +6,7 @@
             <div class="carousel-inner">
                 @foreach ($carousels as $index => $carousel)
                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                        <img class="w-100" src="{{ asset($carousel->background_image) }}" alt="Image">
+                        <img class="w-100" src="{{ Storage::url($carousel->background_image) }}" alt="Image">
                         <div class="carousel-caption d-flex align-items-center">
                             <div class="container">
                                 <div class="row align-items-center justify-content-center justify-content-lg-start">

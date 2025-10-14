@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carousel extends Model
 {
+    protected $cast = [
+        'is_active' => 'boolean',
+    ];
+
+
     protected $fillable = [
         'title',
         'subtitle',

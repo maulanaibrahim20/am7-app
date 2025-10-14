@@ -113,6 +113,37 @@
                 </a>
             </li>
             <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Content Management</span>
+            </li>
+            <li class="menu-item {{ Request::segment(2) == 'content-management-system' ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-picture-in-picture-off"></i>
+                    <div>Content Management</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::segment(3) == 'carousel' ? 'active' : '' }}">
+                        <a href="{{ route('cms.carousel.index') }}" class="menu-link">
+                            <div>Carousel</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::segment(3) == 'endpoint-cront-task' ? 'active' : '' }}">
+                        <a href="{{ route('setting.endpoint-cront-task.index') }}" class="menu-link">
+                            <div>Site Settings</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
+                        <a href="{{ url('log-viewer') }}" target="_blank" class="menu-link">
+                            <div>About</div>
+                        </a>
+                    </li>
+                    <li class="menu-item ">
+                        <a href="{{ url('log-viewer') }}" target="_blank" class="menu-link">
+                            <div>Feature</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Master</span>
             </li>
             <li class="menu-item {{ Request::segment(3) == 'category' ? 'active' : '' }}">

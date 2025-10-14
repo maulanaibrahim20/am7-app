@@ -25,6 +25,33 @@
  <script src="{{ url('/template') }}/js/pages-auth.js"></script>
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ <script>
+     $(document).ready(function() {
+         // Tangani semua tombol dengan class .btn-delete
+         $(document).on('click', '.btn-delete', function(e) {
+             e.preventDefault();
+
+             const form = $(this).closest('form'); // ambil form terkait
+
+             Swal.fire({
+                 title: 'Yakin ingin menghapus?',
+                 text: "Data yang dihapus tidak dapat dikembalikan!",
+                 icon: 'warning',
+                 showCancelButton: true,
+                 confirmButtonColor: '#d33',
+                 cancelButtonColor: '#6c757d',
+                 confirmButtonText: 'Ya, hapus!',
+                 cancelButtonText: 'Batal'
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                     // Submit form secara normal (non-AJAX)
+                     form.submit();
+                 }
+             });
+         });
+     });
+ </script>
  <script>
      @if (session('success'))
          Swal.fire({
@@ -38,7 +65,9 @@
          Swal.fire({
              icon: 'success',
              title: 'Berhasil',
-             text: {!! json_encode(session('msg')) !!}
+             text: {!! json_encode(session('msg')) !!},
+             timer: 2000,
+             showConfirmButton: false
          });
      @endif
 
