@@ -53,10 +53,16 @@
 @section('breadcrumb', 'Carousel Management')
 @section('page_nav_button')
     <div class="d-flex gap-2">
-        <a href="{{ route('cms.carousel.create') }}" class="btn btn-primary d-none d-sm-inline-block" data-toggle="ajaxModal"
-            data-title="Carousel | Add New" data-size="xl">
-            <i class="fas fa-plus-circle me-2"></i>Add New
-        </a>
+        @if ($canAddMore)
+            <a href="{{ route('cms.carousel.create') }}" class="btn btn-primary d-none d-sm-inline-block"
+                data-toggle="ajaxModal" data-title="Carousel | Add New" data-size="xl">
+                <i class="fas fa-plus-circle me-2"></i>Add New
+            </a>
+        @else
+            <button type="button" class="btn btn-secondary" disabled>
+                <i class="ti ti-info-circle me-2"></i>Max 5 Carousel
+            </button>
+        @endif
         <a href="{{ route('cms.carousel.preview') }}" class="btn btn-warning">
             <i class="fas fa-eye me-2"></i>Preview
         </a>
@@ -104,7 +110,7 @@
                                 {{ Str::limit($carousel->subtitle, 60) }}
                             </p>
                         @endif
-
+                        {{--
                         @if ($carousel->button_text)
                             <div class="mb-3 p-2 bg-light rounded">
                                 <small class="text-muted d-block mb-1">
@@ -117,7 +123,7 @@
                                     </small>
                                 @endif
                             </div>
-                        @endif
+                        @endif --}}
 
                         <div class="d-flex justify-content-between align-items-center mb-3 text-muted small">
                             <span>
@@ -142,7 +148,7 @@
                                     <i class="fas fa-edit me-1"></i>Edit
                                 </a>
                                 <form action="{{ route('cms.carousel.destroy', $carousel->id) }}" method="POST"
-                                    class="m-0 p-0 flex-fill">
+                                    class="m-0 p-0 flex-fill" id="ajxFormDelete" data-ajxFormDelete-reset="true">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger w-100 rounded-end btn-delete">

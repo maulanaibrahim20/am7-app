@@ -184,12 +184,37 @@ $(document).ready(function () {
     // });
 
     $(document).on("submit", "#ajxFormDelete", function (e) {
-        $(this).ajaxSubmit({
-            beforeSubmit: showConfirmDelete,
-            error: showError,
-            success: showResponse,
+        e.preventDefault();
+        const $form = $(this);
+        const resetOnDelete = $form.attr("data-ajxFormDelete-reset") === "true"; // baca atribut
+        const deleteUrl = $form.attr("action");
+
+        Swal.fire({
+            title: "Apakah kamu yakin?",
+            text: "Data yang dihapus tidak dapat dikembalikan!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Ya, hapus!",
+            cancelButtonText: "Batal",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: deleteUrl,
+                    type: "POST",
+                    data: $form.serialize(),
+                    success: function (res) {
+                        showResponse(res, $form, resetOnDelete);
+                    },
+                    error: function (err) {
+                        showError(err);
+                    },
+                });
+            }
         });
-        return false;
+
+        return false; // jangan submit normal
     });
 
     /* Select ALl Checkbox */
@@ -369,11 +394,12 @@ function showConfirmDelete(formData, jqForm, options) {
     // jangan submit otomatis, karena submit akan dilakukan di dalam then()
     return false;
 }
-function showResponse(data) {
+function showResponse(data, $formElm = null, resetOnDelete = false) {
     var $formElm = $("#ajxForm");
     var $elModal = $("#ajaxModal");
     var $errElm = $("#ajxForm_message");
     $errElm.show().html("");
+
     if (!$.isEmptyObject(data.error)) {
         if ($elModal.length && $("body").hasClass("modal-open")) {
             /* bila ada modal */
@@ -430,6 +456,10 @@ function showResponse(data) {
         /* Bila ada datatables fixed*/
         if ($("#dataTblFixed").length != 0) {
             _reload_datatables();
+        }
+
+        if (resetOnDelete === true) {
+            window.location.reload();
         }
 
         /* Bila ada modal - Hide */

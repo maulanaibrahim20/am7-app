@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\{
     BookingController,
     CategoryController,
     CmsCarouselController,
+    CmsFeatureController,
     CmsSiteSettingController,
     ContentManagementSystemController,
     CustomerController,
@@ -206,9 +207,21 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
             Route::put('/{id}', 'update')->name('update');
             Route::delete('/{id}', 'destroy')->name('destroy');
         });
+
         Route::prefix('site-setting')->name('siteSetting.')->controller(CmsSiteSettingController::class)->group(function () {
             Route::get('/', 'index')->name('index');
             Route::put('/{id}', 'update')->name('update');
+        });
+
+        Route::prefix('feature')->name('feature.')->controller(CmsFeatureController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getData', 'getData')->name('getData');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{id}', 'destroy')->name('destroy');
         });
     });
 

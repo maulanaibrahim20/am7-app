@@ -113,7 +113,7 @@
                                             !$siteSetting->twitter_url &&
                                             !$siteSetting->linkedin_url &&
                                             !$siteSetting->instagram_url)
-                                        <p class="-50 small mb-0 mt-3">
+                                        <p class="small mb-0 mt-3">
                                             <i class="ti ti-info-circle me-1"></i>
                                             No social media links configured yet
                                         </p>
@@ -173,7 +173,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <h6 class="text-primary mb-3">
-                                    <i class="ti ti-share-alt me-2"></i>Social Media Links
+                                    <i class="ti ti-share me-2"></i>Social Media Links
                                 </h6>
                             </div>
 

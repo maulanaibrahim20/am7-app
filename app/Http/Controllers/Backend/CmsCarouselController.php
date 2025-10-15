@@ -35,8 +35,11 @@ class CmsCarouselController extends Controller
             ->take(5)
             ->get();
 
+        $canAddMore = $carousels->count() < 5;
+
         return view('app.backend.pages.cms.carousel.index', [
-            'carousels' => $carousels
+            'carousels' => $carousels,
+            'canAddMore' => $canAddMore
         ]);
     }
 

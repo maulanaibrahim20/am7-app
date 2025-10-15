@@ -121,24 +121,24 @@
                     <div>Content Management</div>
                 </a>
                 <ul class="menu-sub">
-                    <li class="menu-item {{ Request::segment(3) == 'carousel' ? 'active' : '' }}">
-                        <a href="{{ route('cms.carousel.index') }}" class="menu-link">
-                            <div>Carousel</div>
-                        </a>
-                    </li>
                     <li class="menu-item {{ Request::segment(3) == 'site-setting' ? 'active' : '' }}">
                         <a href="{{ route('cms.siteSetting.index') }}" class="menu-link">
                             <div>Site Settings</div>
                         </a>
                     </li>
-                    <li class="menu-item ">
-                        <a href="{{ url('log-viewer') }}" target="_blank" class="menu-link">
-                            <div>About</div>
+                    <li class="menu-item {{ Request::segment(3) == 'carousel' ? 'active' : '' }}">
+                        <a href="{{ route('cms.carousel.index') }}" class="menu-link">
+                            <div>Carousel</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::segment(3) == 'feature' ? 'active' : '' }}">
+                        <a href="{{ route('cms.feature.index') }}" class="menu-link">
+                            <div>Feature</div>
                         </a>
                     </li>
                     <li class="menu-item ">
-                        <a href="{{ url('log-viewer') }}" target="_blank" class="menu-link">
-                            <div>Feature</div>
+                        <a href="{{ url('log-viewer') }}" class="menu-link">
+                            <div>About</div>
                         </a>
                     </li>
                 </ul>

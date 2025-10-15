@@ -26,7 +26,7 @@
 
  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
- <script>
+ {{-- <script>
      $(document).ready(function() {
          // Tangani semua tombol dengan class .btn-delete
          $(document).on('click', '.btn-delete', function(e) {
@@ -51,7 +51,7 @@
              });
          });
      });
- </script>
+ </script> --}}
  <script>
      @if (session('success'))
          Swal.fire({

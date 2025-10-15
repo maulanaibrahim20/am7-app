@@ -22,19 +22,19 @@
                          placeholder="Deskripsi atau subtitle carousel (opsional)"></textarea>
                  </div>
 
-                 <div class="mb-3">
+                 {{-- <div class="mb-3">
                      <label for="button_text" class="form-label fw-semibold">Button Text</label>
                      <input type="text" class="form-control" id="button_text" name="button_text"
                          placeholder="e.g., Pelajari Lebih Lanjut">
                      <small class="text-muted">Teks yang akan ditampilkan pada tombol</small>
-                 </div>
+                 </div> --}}
 
-                 <div class="mb-3">
+                 {{-- <div class="mb-3">
                      <label for="button_url" class="form-label fw-semibold">Button URL</label>
                      <input type="url" class="form-control" id="button_url" name="button_url"
                          placeholder="https://example.com">
                      <small class="text-muted">Link tujuan saat tombol diklik</small>
-                 </div>
+                 </div> --}}
 
                  <div class="row">
                      <div class="col-6">
