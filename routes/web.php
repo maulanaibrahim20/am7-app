@@ -75,6 +75,9 @@ Route::group(['prefix' => '~admin', 'middleware' => 'auth'], function () {
     Route::get('/cashier/pring/invoice/{id}', [CashierController::class, 'printInvoice'])->name('cashier.printInvoice');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/getTopCustomer', [DashboardController::class, 'getDataTopCustomer'])->name('dashboard.getDataTopCustomer');
+    Route::get('/dashboard/getRecentBookings', [DashboardController::class, 'getRecentBookings'])->name('dashboard.getRecentBookings');
+    Route::get('/dashboard/getLowStockProducts', [DashboardController::class, 'getLowStockProducts'])->name('dashboard.getLowStockProducts');
 
     Route::prefix('user')->name('user.')->group(function () {
         Route::prefix('admin')->name('admin.')->controller(AdminController::class)->group(function () {

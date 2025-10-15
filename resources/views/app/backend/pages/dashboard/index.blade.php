@@ -225,40 +225,22 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm">
+                        <table id="lowStockTbl" class="table table-sm table-responsive"
+                            data-ajax="{{ route('dashboard.getLowStockProducts') }}" data-processing="true"
+                            data-server-side="true" data-length-menu="[5, 10, 25, 50]" data-ordering="true"
+                            data-col-reorder="true">
                             <thead>
                                 <tr>
-                                    <th>Produk</th>
-                                    <th>SKU</th>
-                                    <th>Stok</th>
-                                    <th>Min Stok</th>
-                                    <th>Status</th>
+                                    <th data-data="DT_RowIndex" data-orderable="false" data-searchable="false">No</th>
+                                    <th data-data="name" data-default-content="-">Produk</th>
+                                    <th data-data="sku" data-default-content="-">SKU</th>
+                                    <th data-data="stock_quantity" data-default-content="-">Stok</th>
+                                    <th data-data="min_stock" data-default-content="-">Min Stok</th>
+                                    <th data-data="status" data-default-content="-">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @forelse ($lowStockProducts as $product)
-                                    <tr>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->sku }}</td>
-                                        <td>{{ $product->stock_quantity }}</td>
-                                        <td>{{ $product->min_stock }}</td>
-                                        <td>
-                                            @if ($product->stock_quantity <= 0)
-                                                <span class="badge bg-danger">Habis</span>
-                                            @elseif($product->stock_quantity <= $product->reorder_point)
-                                                <span class="badge bg-warning">Reorder</span>
-                                            @else
-                                                <span class="badge bg-info">Rendah</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr></tr>
-                                    <td colspan="5" class="text-center">Tidak ada data</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -275,49 +257,19 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-sm">
+                        <table id="recentBookingsTbl" class="table table-responsive"
+                            data-ajax="{{ route('dashboard.getRecentBookings') }}" data-processing="true"
+                            data-server-side="true" data-length-menu="[5, 10, 25, 50]" data-ordering="true"
+                            data-col-reorder="true">
                             <thead>
                                 <tr>
-                                    <th>Kode</th>
-                                    <th>Customer</th>
-                                    <th>Time</th>
-                                    <th>Status</th>
+                                    <th data-data="DT_RowIndex" data-orderable="false" data-searchable="false">No</th>
+                                    <th data-data="booking_code" data-default-content="-">Kode</th>
+                                    <th data-data="customer" data-default-content="-">Customer</th>
+                                    <th data-data="booking_time" data-default-content="-">Time</th>
+                                    <th data-data="status" data-default-content="-">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($recentBookings as $booking)
-                                    <tr>
-                                        <td>{{ $booking->booking_code }}</td>
-                                        <td>
-                                            <div>{{ $booking->customer_name }}</div>
-                                            <small class="text-muted">{{ $booking->customer_phone }}</small>
-                                        </td>
-                                        <td>{{ $booking->booking_time }}</td>
-                                        <td>
-                                            @switch($booking->status)
-                                                @case('pending')
-                                                    <span class="badge bg-warning">Pending</span>
-                                                @break
-
-                                                @case('approved')
-                                                    <span class="badge bg-info">Approved</span>
-                                                @break
-
-                                                @case('in_progress')
-                                                    <span class="badge bg-primary">In Progress</span>
-                                                @break
-
-                                                @case('completed')
-                                                    <span class="badge bg-success">Completed</span>
-                                                @break
-
-                                                @default
-                                                    <span class="badge bg-secondary">{{ ucfirst($booking->status) }}</span>
-                                            @endswitch
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -335,36 +287,21 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table id="dataTbl" class="table table-responsive"
+                            data-ajax="{{ route('dashboard.getDataTopCustomer') }}" data-processing="true"
+                            data-server-side="true" data-length-menu="[10, 25, 50, 75, 100]" data-ordering="true"
+                            data-col-reorder="true">
+
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Nama</th>
-                                    <th>Telepon</th>
-                                    <th>Total Visits</th>
-                                    <th>Total Purchases</th>
-                                    <th>Vehicle</th>
+                                    <th data-data="DT_RowIndex" data-orderable="false" data-searchable="false">No</th>
+                                    <th data-data="name" data-default-content="-">Name</th>
+                                    <th data-data="phone" data-default-content="-">Phone</th>
+                                    <th data-data="visit_count" data-default-content="-">Total Visits</th>
+                                    <th data-data="total_spent" data-default-content="-">Total Purchases</th>
+                                    <th data-data="vehicle_number" data-default-content="-">Vehicle</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach ($topCustomers as $index => $customer)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $customer->name }}</td>
-                                        <td>{{ $customer->phone }}</td>
-                                        <td>{{ $customer->visit_count }} kali</td>
-                                        <td class="fw-semibold">Rp
-                                            {{ number_format($customer->total_spent, 0, ',', '.') }}</td>
-                                        <td>
-                                            @if ($customer->vehicle_number)
-                                                {{ $customer->vehicle_number }} ({{ $customer->vehicle_type }})
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -375,6 +312,57 @@
 
 @push('js')
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        $('#recentBookingsTbl').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: $('#recentBookingsTbl').data('ajax'),
+            columns: [{
+                    data: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'booking_code'
+                },
+                {
+                    data: 'customer'
+                },
+                {
+                    data: 'booking_time'
+                },
+                {
+                    data: 'status'
+                }
+            ]
+        });
+        $('#lowStockTbl').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: $('#lowStockTbl').data('ajax'),
+            columns: [{
+                    data: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'name'
+                },
+                {
+                    data: 'sku'
+                },
+                {
+                    data: 'stock_quantity'
+                },
+                {
+                    data: 'min_stock'
+                },
+                {
+                    data: 'status'
+                }
+            ]
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Revenue Chart

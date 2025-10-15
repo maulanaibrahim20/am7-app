@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\{Booking, Customer, Product, Sale, SaleItem};
+use Carbon\Carbon;
+use Illuminate\Support\Number;
+use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
 {
@@ -41,20 +44,6 @@ class DashboardController extends Controller
 
         $topServices = $this->getTopServices();
 
-        $lowStockProducts = Product::whereRaw('stock_quantity <= min_stock')
-            ->orderBy('stock_quantity', 'asc')
-            ->limit(5)
-            ->get();
-
-        $recentBookings = Booking::whereDate('booking_date', today())
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
-
-        $topCustomers = Customer::orderBy('total_spent', 'desc')
-            ->limit(10)
-            ->get();
-
         return view('app.backend.pages.dashboard.index', compact(
             'todayRevenue',
             'revenueGrowth',
@@ -65,11 +54,89 @@ class DashboardController extends Controller
             'bookingStatus',
             'topProducts',
             'topServices',
-            'lowStockProducts',
-            'recentBookings',
-            'topCustomers'
         ));
     }
+
+    public function getDataTopCustomer(Request $request)
+    {
+        $rows = Customer::orderBy('total_spent', 'desc')
+            ->limit(10)
+            ->get();
+
+        return DataTables::of($rows)
+            ->addIndexColumn()
+            ->editColumn('total_spent', function ($row) {
+                return Number::currency($row->total_spent, 'IDR', 'id', 0);
+            })
+            ->editColumn('visit_count', function ($row) {
+                return $row->visit_count . ' X';
+            })
+            ->addColumn('vehicle_number', function ($row) {
+                if ($row->vehicle_number) {
+                    return $row->vehicle_number . ' (' . $row->vehicle_type . ')';
+                }
+                return '-';
+            })
+            ->rawColumns(['total_spent', 'vehicle_number'])
+            ->make(true);
+    }
+
+    public function getRecentBookings(Request $request)
+    {
+        $rows = Booking::whereDate('booking_date', today())
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
+
+        return DataTables::of($rows)
+            ->addIndexColumn()
+            ->addColumn('customer', function ($row) {
+                return '<div>' . e($row->customer_name) . '</div>
+                    <small class="text-muted">' . e($row->customer_phone) . '</small>';
+            })
+            ->editColumn('booking_time', function ($row) {
+                return Carbon::parse($row->booking_time)->format('H:i');
+            })
+            ->editColumn('status', function ($row) {
+                switch ($row->status) {
+                    case 'pending':
+                        return '<span class="badge bg-warning">Pending</span>';
+                    case 'approved':
+                        return '<span class="badge bg-info">Approved</span>';
+                    case 'in_progress':
+                        return '<span class="badge bg-primary">In Progress</span>';
+                    case 'completed':
+                        return '<span class="badge bg-success">Completed</span>';
+                    default:
+                        return '<span class="badge bg-secondary">' . ucfirst($row->status) . '</span>';
+                }
+            })
+            ->rawColumns(['customer', 'status'])
+            ->make(true);
+    }
+
+    public function getLowStockProducts(Request $request)
+    {
+        $rows = Product::whereColumn('stock_quantity', '<=', 'min_stock')
+            ->orderBy('stock_quantity', 'asc')
+            ->limit(5)
+            ->get();
+
+        return DataTables::of($rows)
+            ->addIndexColumn()
+            ->editColumn('status', function ($row) {
+                if ($row->stock_quantity <= 0) {
+                    return '<span class="badge bg-danger">Habis</span>';
+                } elseif ($row->stock_quantity <= $row->reorder_point) {
+                    return '<span class="badge bg-warning">Reorder</span>';
+                } else {
+                    return '<span class="badge bg-info">Rendah</span>';
+                }
+            })
+            ->rawColumns(['status'])
+            ->make(true);
+    }
+
 
     private function getRevenueChartData()
     {
