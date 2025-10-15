@@ -136,8 +136,8 @@
                             <div>Feature</div>
                         </a>
                     </li>
-                    <li class="menu-item ">
-                        <a href="{{ url('log-viewer') }}" class="menu-link">
+                    <li class="menu-item {{ Request::segment(3) == 'about' ? 'active' : '' }}">
+                        <a href="{{ route('cms.about.index') }}" class="menu-link">
                             <div>About</div>
                         </a>
                     </li>
