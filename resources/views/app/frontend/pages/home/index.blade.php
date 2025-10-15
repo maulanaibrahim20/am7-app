@@ -19,13 +19,13 @@
                                         <h1 class="display-3 text-white mb-4 pb-3 animated slideInDown">
                                             {{ $carousel->title }}
                                         </h1>
-                                        @if ($carousel->button_text)
+                                        {{-- @if ($carousel->button_text)
                                             <a href="{{ $carousel->button_url ?? '#' }}"
                                                 class="btn btn-primary py-3 px-5 animated slideInDown">
                                                 {{ $carousel->button_text }}
                                                 <i class="fa fa-arrow-right ms-3"></i>
                                             </a>
-                                        @endif
+                                        @endif --}}
                                     </div>
 
                                     @if ($carousel->foreground_image)
@@ -66,11 +66,11 @@
                             <div class="ps-4">
                                 <h5 class="mb-3">{{ $feature->title }}</h5>
                                 <p>{{ $feature->description }}</p>
-                                @if ($feature->link_text)
+                                {{-- @if ($feature->link_text)
                                     <a class="text-secondary border-bottom" href="{{ $feature->link_url ?? '#' }}">
                                         {{ $feature->link_text }}
                                     </a>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </div>
@@ -121,12 +121,12 @@
                         @endforeach
                     </div>
 
-                    @if ($about->button_text)
+                    {{-- @if ($about->button_text)
                         <a href="{{ $about->button_url ?? '#' }}" class="btn btn-primary py-3 px-5">
                             {{ $about->button_text }}
                             <i class="fa fa-arrow-right ms-3"></i>
                         </a>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
         </div>
@@ -161,7 +161,6 @@
         </div>
     </div>
     <!-- Fact End -->
-
 
     <!-- Service Start -->
     <div class="container-xxl service py-5">

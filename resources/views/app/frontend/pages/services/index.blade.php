@@ -94,21 +94,10 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="bg-primary h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
-                        data-wow-delay="0.6s">
-                        <h1 class="text-white mb-4">Book For A Service</h1>
-                        <a href="{{ route('booking.index') }}" class="btn btn-secondary w-100 py-3" data-toggle="ajaxModal"
-                            data-title="User | Add New" data-size="lg">
-                            Book Now
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <!-- Booking End -->
-
 
     <!-- Testimonial Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -149,8 +138,8 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="bg-light rounded-circle p-2 mx-auto mb-3"
-                        src="{{ url('/landing') }}/img/testimonial-4.jpg" style="width: 80px; height: 80px;">
+                    <img class="bg-light rounded-circle p-2 mx-auto mb-3" src="{{ url('/landing') }}/img/testimonial-4.jpg"
+                        style="width: 80px; height: 80px;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
                     <div class="testimonial-text bg-light text-center p-4">

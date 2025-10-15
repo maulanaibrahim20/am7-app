@@ -91,7 +91,14 @@ class LandingPageController extends Controller
 
     public function about()
     {
-        return view('app.frontend.pages.about.index');
+        $data['features'] = Feature::where('is_active', true)->orderBy('order')->get();
+        $data['about'] = AboutSection::with('features')->first();
+
+        $data['mechanic'] = User::where('is_active', true)->whereHas('roles', function ($q) {
+            $q->where('name', 'mechanic');
+        })->get();
+
+        return view('app.frontend.pages.about.index', $data);
     }
     public function services()
     {

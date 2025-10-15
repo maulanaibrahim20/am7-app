@@ -78,12 +78,12 @@
                                 </div>
                             @endif
 
-                            @if ($aboutSection->button_text && $aboutSection->button_url)
+                            {{-- @if ($aboutSection->button_text && $aboutSection->button_url)
                                 <a href="{{ $aboutSection->button_url }}" class="btn btn-primary py-3 px-5" target="_blank">
                                     {{ $aboutSection->button_text }}
                                     <i class="fa fa-arrow-right ms-3"></i>
                                 </a>
-                            @endif
+                            @endif --}}
                         </div>
                     </div>
                 </div>
